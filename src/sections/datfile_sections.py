@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING
 from binary_file_parser import BaseStruct, Retriever, Version
 from binary_file_parser.types import Bytes
 
+from src.sections.color_data import ColorData
 from src.sections.dat_versions import DE_LATEST
 from src.sections.swgb_data import SwgbData
 from src.sections.terrain_data import TerrainData
@@ -16,9 +17,10 @@ if TYPE_CHECKING:
 
 class DatFile(BaseStruct):
     # @formatter:off
-    file_version: bytes         = Retriever(Bytes[8],                                                               default = b"VER 7.8\x00")
-    swgb_data: SwgbData         = Retriever(SwgbData,       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default_factory = SwgbData)
-    terrain_data: TerrainData   = Retriever(TerrainData,                                                            default_factory = TerrainData)
+    file_version: bytes                      = Retriever(Bytes[8],                                                               default = b"VER 7.8\x00")
+    swgb_data: SwgbData                      = Retriever(SwgbData,       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default_factory = SwgbData)
+    terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
+    color_data: ColorData                    = Retriever(ColorData,  default_factory = ColorData)
     # @formatter:on
 
     @classmethod
