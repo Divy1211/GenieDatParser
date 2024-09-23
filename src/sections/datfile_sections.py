@@ -22,7 +22,7 @@ class DatFile(BaseStruct):
     swgb_data: SwgbData                      = Retriever(SwgbData,       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default_factory = SwgbData)
     terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
     color_data: ColorData                    = Retriever(ColorData,                                                              default_factory = ColorData)
-    sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = Sound)
+    sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = lambda sv: [Sound(sv) for _ in range(685)])
     # @formatter:on
 
     @classmethod

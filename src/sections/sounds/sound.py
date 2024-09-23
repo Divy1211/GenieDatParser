@@ -18,5 +18,5 @@ class Sound(BaseStruct):
     cache_time: int                = Retriever(int32,                                                           default = 300000)
     total_probability1: int        = Retriever(int16,     min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = 100)
     total_probability2: int        = Retriever(int16,     min_ver = Version((7, 1)),                            default = 100)
-    sound_items: list[SoundItem]   = Retriever(SoundItem,                                                       default = SoundItem)
+    sound_items: list[SoundItem]   = Retriever(SoundItem,                                                       default_factory = lambda _: [])
     # @formatter:on
