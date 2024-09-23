@@ -11,10 +11,14 @@ class Sound(BaseStruct):
     def set_sound_item_repeat(_, instance: Sound):
         Retriever.set_repeat(Sound.sound_items, instance, instance.file_count)
 
+    @staticmethod
+    def sync_sound_item_repeat(_, instance: Sound):
+        instance.file_count = len(instance.sound_items)
+
     # @formatter:off
     id: int                        = Retriever(int16,                                                           default = 0)
     play_delay: int                = Retriever(uint16,                                                          default = 0)
-    file_count: int                = Retriever(uint16,                                                          default = 0, on_set = [set_sound_item_repeat])
+    file_count: int                = Retriever(uint16,                                                          default = 0, on_set = [set_sound_item_repeat], on_write = [sync_sound_item_repeat])
     cache_time: int                = Retriever(int32,                                                           default = 300000)
     total_probability1: int        = Retriever(int16,     min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = 100)
     total_probability2: int        = Retriever(int16,     min_ver = Version((7, 1)),                            default = 100)
