@@ -4,11 +4,14 @@ import zlib
 from typing import TYPE_CHECKING
 
 from binary_file_parser import BaseStruct, Retriever, Version
-from binary_file_parser.types import Bytes, Array16
+from binary_file_parser.types import (
+    Bytes, Array16
+)
 
 from src.sections.color_data import ColorData
 from src.sections.dat_versions import DE_LATEST
 from src.sections.sounds import Sound
+from src.sections.sprite_data import SpriteData
 from src.sections.swgb_data import SwgbData
 from src.sections.terrain_data import TerrainData
 
@@ -23,6 +26,7 @@ class DatFile(BaseStruct):
     terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
     color_data: ColorData                    = Retriever(ColorData,                                                              default_factory = ColorData)
     sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = lambda sv: [Sound(sv) for _ in range(685)])
+    sprite_data: SpriteData                  = Retriever(SpriteData,                                                            default_factory = SpriteData)
     # @formatter:on
 
     @classmethod
