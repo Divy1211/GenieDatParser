@@ -31,8 +31,8 @@ class Sprite(BaseStruct):
             instance.num_graphic_angles = n
 
     # @formatter:off
-    _name_aoe1: str                          = Retriever(FixedLenStr[21], min_ver = Version((3, 7)), max_ver = Version((3, 7)), default=0)
-    _file_name_aoe1: str                     = Retriever(FixedLenStr[13], min_ver = Version((3, 7)), max_ver = Version((3, 7)), default=0)
+    _name_aoe1: str                          = Retriever(FixedLenStr[21], min_ver = Version((3, 7)), max_ver = Version((3, 7)), default = "")
+    _file_name_aoe1: str                     = Retriever(FixedLenStr[13], min_ver = Version((3, 7)), max_ver = Version((3, 7)), default = "")
 
     _str_sign1_de1: bytes                    = Retriever(Bytes[2],        min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = b"\x60\x0A")
     _name_de1: str                           = Retriever(str16,           min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = "")
@@ -40,11 +40,11 @@ class Sprite(BaseStruct):
     _file_name_de1: str                      = Retriever(str16,           min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = "")
     first_frame: int                         = Retriever(uint16,          min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = 0)
 
-    _name_aoe2: str                          = Retriever(FixedLenStr[21], min_ver = Version((5, 7)), max_ver = Version((5, 7)), default=0)
-    _file_name_aoe2: str                     = Retriever(FixedLenStr[13], min_ver = Version((5, 7)), max_ver = Version((5, 7)), default=0)
+    _name_aoe2: str                          = Retriever(FixedLenStr[21], min_ver = Version((5, 7)), max_ver = Version((5, 7)), default = "")
+    _file_name_aoe2: str                     = Retriever(FixedLenStr[13], min_ver = Version((5, 7)), max_ver = Version((5, 7)), default = "")
 
-    _name_swgb: str                          = Retriever(FixedLenStr[25], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default=0)
-    _file_name_swgb: str                     = Retriever(FixedLenStr[25], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default=0)
+    _name_swgb: str                          = Retriever(FixedLenStr[25], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = "")
+    _file_name_swgb: str                     = Retriever(FixedLenStr[25], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = "")
 
     _str_sign1_de2: bytes                    = Retriever(Bytes[2],        min_ver = Version((7, 1)),                            default = b"\x60\x0A")
     _name_de2: str                           = Retriever(str16,           min_ver = Version((7, 1)),                            default = "")
