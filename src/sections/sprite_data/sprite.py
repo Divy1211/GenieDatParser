@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from binary_file_parser import BaseStruct, Retriever, Version, RetrieverCombiner
 from binary_file_parser.types import (
-    FixedLenStr, Bytes, str16, uint16, uint32, bool8, int8, int16, FixedLenArray,
+    FixedLenStr, Bytes, str16, uint16, bool8, int8, int16, FixedLenArray,
     float32, uint8, int32
 )
 
