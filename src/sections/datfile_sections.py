@@ -26,7 +26,7 @@ class DatFile(BaseStruct):
     terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
     color_data: ColorData                    = Retriever(ColorData,                                                              default_factory = ColorData)
     sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = lambda sv: [Sound(sv) for _ in range(685)])
-    sprite_data: SpriteData                  = Retriever(SpriteData,                                                            default_factory = SpriteData)
+    sprite_data: SpriteData                  = Retriever(SpriteData,                                                             default_factory = SpriteData)
     # @formatter:on
 
     @classmethod
