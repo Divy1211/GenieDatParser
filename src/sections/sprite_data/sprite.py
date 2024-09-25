@@ -2,13 +2,12 @@ from __future__ import annotations
 
 from binary_file_parser import BaseStruct, Retriever, Version, RetrieverCombiner
 from binary_file_parser.types import (
-    FixedLenStr, Bytes, str16, uint16, bool8, int8, int16, FixedLenArray,
-    float32, uint8, int32
+    Bytes, str16, uint16, bool8, int8, int16, FixedLenArray,
+    float32, uint8, int32, FixedLenNTStr
 )
 
 from src.sections.sprite_data.sprite_attack_sound import SpriteAttackSound
 from src.sections.sprite_data.sprite_delta import SpriteDelta
-
 
 class Sprite(BaseStruct):
     @staticmethod
@@ -31,27 +30,27 @@ class Sprite(BaseStruct):
             instance.num_graphic_angles = n
 
     # @formatter:off
-    _name_aoe1: str                          = Retriever(FixedLenStr[21], min_ver = Version((3, 7)), max_ver = Version((3, 7)), default = "")
-    _file_name_aoe1: str                     = Retriever(FixedLenStr[13], min_ver = Version((3, 7)), max_ver = Version((3, 7)), default = "")
+    _name_aoe1: str                          = Retriever(FixedLenNTStr[21], min_ver = Version((3, 7)), max_ver = Version((3, 7)), default = "")
+    _file_name_aoe1: str                     = Retriever(FixedLenNTStr[13], min_ver = Version((3, 7)), max_ver = Version((3, 7)), default = "")
 
-    _str_sign1_de1: bytes                    = Retriever(Bytes[2],        min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = b"\x60\x0A")
-    _name_de1: str                           = Retriever(str16,           min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = "")
-    _str_sign2_de1: bytes                    = Retriever(Bytes[2],        min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = b"\x60\x0A")
-    _file_name_de1: str                      = Retriever(str16,           min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = "")
-    first_frame: int                         = Retriever(uint16,          min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = 0)
+    _str_sign1_de1: bytes                    = Retriever(Bytes[2],          min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = b"\x60\x0A")
+    _name_de1: str                           = Retriever(str16,             min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = "")
+    _str_sign2_de1: bytes                    = Retriever(Bytes[2],          min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = b"\x60\x0A")
+    _file_name_de1: str                      = Retriever(str16,             min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = "")
+    first_frame: int                         = Retriever(uint16,            min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = 0)
 
-    _name_aoe2: str                          = Retriever(FixedLenStr[21], min_ver = Version((5, 7)), max_ver = Version((5, 7)), default = "")
-    _file_name_aoe2: str                     = Retriever(FixedLenStr[13], min_ver = Version((5, 7)), max_ver = Version((5, 7)), default = "")
+    _name_aoe2: str                          = Retriever(FixedLenNTStr[21], min_ver = Version((5, 7)), max_ver = Version((5, 7)), default = "")
+    _file_name_aoe2: str                     = Retriever(FixedLenNTStr[13], min_ver = Version((5, 7)), max_ver = Version((5, 7)), default = "")
 
-    _name_swgb: str                          = Retriever(FixedLenStr[25], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = "")
-    _file_name_swgb: str                     = Retriever(FixedLenStr[25], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = "")
+    _name_swgb: str                          = Retriever(FixedLenNTStr[25], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = "")
+    _file_name_swgb: str                     = Retriever(FixedLenNTStr[25], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = "")
 
-    _str_sign1_de2: bytes                    = Retriever(Bytes[2],        min_ver = Version((7, 1)),                            default = b"\x60\x0A")
-    _name_de2: str                           = Retriever(str16,           min_ver = Version((7, 1)),                            default = "")
-    _str_sign2_de2: bytes                    = Retriever(Bytes[2],        min_ver = Version((7, 1)),                            default = b"\x60\x0A")
-    _file_name_de2: str                      = Retriever(str16,           min_ver = Version((7, 1)),                            default = "")
-    _str_sign3: bytes                        = Retriever(Bytes[2],        min_ver = Version((7, 1)),                            default = b"\x60\x0A")
-    particle_effect_name: str                = Retriever(str16,           min_ver = Version((7, 1)),                            default = "")
+    _str_sign1_de2: bytes                    = Retriever(Bytes[2],          min_ver = Version((7, 1)),                            default = b"\x60\x0A")
+    _name_de2: str                           = Retriever(str16,             min_ver = Version((7, 1)),                            default = "")
+    _str_sign2_de2: bytes                    = Retriever(Bytes[2],          min_ver = Version((7, 1)),                            default = b"\x60\x0A")
+    _file_name_de2: str                      = Retriever(str16,             min_ver = Version((7, 1)),                            default = "")
+    _str_sign3: bytes                        = Retriever(Bytes[2],          min_ver = Version((7, 1)),                            default = b"\x60\x0A")
+    particle_effect_name: str                = Retriever(str16,             min_ver = Version((7, 1)),                            default = "")
 
     slp_id: int                              = Retriever(int32,                             default = -1)
     is_loaded: bool                          = Retriever(bool8,                             default = False)

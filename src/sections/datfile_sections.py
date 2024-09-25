@@ -3,7 +3,7 @@ from __future__ import annotations
 import zlib
 from typing import TYPE_CHECKING
 
-from binary_file_parser import BaseStruct, Retriever, Version
+from binary_file_parser import BaseStruct, Retriever, Version, DebugByteStream
 from binary_file_parser.types import (
     Bytes, Array16
 )
