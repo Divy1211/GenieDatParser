@@ -9,6 +9,7 @@ from binary_file_parser.types import (
 from src.sections.sprite_data.sprite_attack_sound import SpriteAttackSound
 from src.sections.sprite_data.sprite_delta import SpriteDelta
 
+
 class Sprite(BaseStruct):
     @staticmethod
     def set_deltas_repeat(_, instance: Sprite):
