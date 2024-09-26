@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from binary_file_parser import BaseStruct, Retriever, Version
-from binary_file_parser.types import int8, int16, float32, int32, uint16, uint32, uint8, Bytes, void
+from binary_file_parser.types import int8, int16, float32, int32, uint16, uint32, uint8, void, Bytes, FixedLenArray
 
 from src.sections.terrain_data.terrain import Terrain
 from src.sections.terrain_data.terrain_border import TerrainBorder
@@ -14,60 +14,55 @@ class TerrainData(BaseStruct):
         Retriever.set_repeat(TerrainData.terrains, instance, Terrain.num_terrains)
 
     # @formatter:off
-    virt_function_ptr: int          = Retriever(int32,                                                                default = 0)
-    map_pointer: int                = Retriever(int32,                                                                default = 0)
-    map_width: int                  = Retriever(int32,                                                                default = 0)
-    map_height: int                 = Retriever(int32,                                                                default = 0)
-    world_width: int                = Retriever(int32,                                                                default = 0)
-    world_height: int               = Retriever(int32,                                                                default = 0)
-    tile_sizes: TileSize            = Retriever(TileSize,                                                             default_factory = TileSize, repeat = 19)
-    padding1: int                   = Retriever(int16,                                                                default = 0)
+    _vtable_ptr: bytes                  = Retriever(Bytes[4],                                                                                default = b"\x00" * 4)
+    _map_ptr: bytes                     = Retriever(Bytes[4],                                                                                default = b"\x00" * 4)
+    _map_width: int                     = Retriever(int32,                                                                                   default = 0)
+    _map_height: int                    = Retriever(int32,                                                                                   default = 0)
+    _world_width: int                   = Retriever(int32,                                                                                   default = 0)
+    _world_height: int                  = Retriever(int32,                                                                                   default = 0)
 
-    _                               = Retriever(void,                                                                 default = b"", on_set = [set_terrain_repeat])
-    terrains: Terrain               = Retriever(Terrain,                                                              default_factory = Terrain)
-    terrain_border: TerrainBorder   = Retriever(TerrainBorder,  min_ver = Version((3, 7)), max_ver = Version((5, 9)), default_factory = TerrainBorder, repeat = 16)
+    tile_sizes: list[TileSize]          = Retriever(FixedLenArray[TileSize, 19],                                                             default_factory = TileSize)
 
-    map_row_offset: int             = Retriever(int32,          min_ver = Version((3, 7)), max_ver = Version((5, 9)), default=0)
+    _padding1: int                      = Retriever(int16,                                                                                   default = 0)
 
-    map_min_x: int                  = Retriever(float32,        min_ver = Version((5, 7)),                            default = 0)
-    map_min_y: int                  = Retriever(float32,        min_ver = Version((5, 7)),                            default = 0)
-    map_max_x: int                  = Retriever(float32,        min_ver = Version((5, 7)),                            default = 0)
-    map_max_y: int                  = Retriever(float32,        min_ver = Version((5, 7)),                            default = 0)
-    map_max_xplus1: int             = Retriever(float32,        min_ver = Version((5, 7)),                            default = 0)
-    map_min_yplus1: int             = Retriever(float32,        min_ver = Version((5, 7)),                            default = 0)
+    _void: bytes                        = Retriever(void,                                                                                    default = b"", on_set = [set_terrain_repeat])
+    terrains: list[Terrain]             = Retriever(Terrain,                                                                                 default_factory = Terrain)
+    terrain_border: list[TerrainBorder] = Retriever(FixedLenArray[TerrainBorder, 16],  min_ver = Version((3, 7)), max_ver = Version((5, 9)), default_factory = TerrainBorder)
 
-    terrain_count_additional: int   = Retriever(uint16,                                                               default = 0)
-    borders_used: int               = Retriever(uint16,                                                               default = 0)
-    max_terrain: int                = Retriever(int16,                                                                default = 0)
-    tile_width: int                 = Retriever(int16,                                                                default = 0)
-    tile_height: int                = Retriever(int16,                                                                default = 0)
-    tile_half_height: int           = Retriever(int16,                                                                default = 0)
-    tile_half_width: int            = Retriever(int16,                                                                default = 0)
-    elev_height: int                = Retriever(int16,                                                                default = 0)
-    current_row: int                = Retriever(int16,                                                                default = 0)
-    current_column: int             = Retriever(int16,                                                                default = 0)
-    block_beginn_row: int           = Retriever(int16,                                                                default = 0)
-    block_end_row: int              = Retriever(int16,                                                                default = 0)
-    block_begin_column: int         = Retriever(int16,                                                                default = 0)
-    block_end_column: int           = Retriever(int16,                                                                default = 0)
-
-    search_map_ptr: int             = Retriever(int32,          min_ver = Version((5, 7)),                            default = 0)
-    search_map_rows_ptr: int        = Retriever(int32,          min_ver = Version((5, 7)),                            default = 0)
-    any_frame_change: int           = Retriever(int8,           min_ver = Version((5, 7)),                            default = 0)
-
-    any_frame_change_aoe1: int      = Retriever(int32,          max_ver = Version((4, 5)),                            default = 0)
-    search_map_ptr_aoe1: int        = Retriever(int32,          max_ver = Version((4, 5)),                            default = 0)
-    search_map_rows_ptr_aoe1: int   = Retriever(int32,          max_ver = Version((4, 5)),                            default = 0)
-
-    map_visible_flag: int           = Retriever(int8,                                                                 default = 0)
-    fog_flag: int                   = Retriever(int8,                                                                 default = 0)
-
-    terrain_blob0_swgb: int         = Retriever(uint8,          min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = 0, repeat = 25)
-    terrain_blob1_swgb: int         = Retriever(uint32,         min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = 0, repeat = 157)
-
-    terrain_blob0_aoe1: int         = Retriever(uint8,          max_ver = Version((4, 5)),                            default = 0, repeat = 2)
-    terrain_blob1_aoe1: int         = Retriever(uint32,         max_ver = Version((4, 5)),                            default = 0, repeat = 5)
-
-    terrain_blob0: int              = Retriever(uint8,          min_ver = Version((5, 7)), max_ver = Version((5, 7)), default = 0, repeat = 21)
-    terrain_blob1: int              = Retriever(uint32,         min_ver = Version((5, 7)), max_ver = Version((5, 7)), default = 0, repeat = 157)
+    # all useless... yES
+    _map_row_offset: int                = Retriever(int32,                             min_ver = Version((3, 7)), max_ver = Version((5, 9)), default = 0)
+    _map_min_x: int                     = Retriever(float32,                           min_ver = Version((5, 7)),                            default = 0)
+    _map_min_y: int                     = Retriever(float32,                           min_ver = Version((5, 7)),                            default = 0)
+    _map_max_x: int                     = Retriever(float32,                           min_ver = Version((5, 7)),                            default = 0)
+    _map_max_y: int                     = Retriever(float32,                           min_ver = Version((5, 7)),                            default = 0)
+    _map_max_x1: int                    = Retriever(float32,                           min_ver = Version((5, 7)),                            default = 0)
+    _map_min_y1: int                    = Retriever(float32,                           min_ver = Version((5, 7)),                            default = 0)
+    _num_additional_terrains: int       = Retriever(uint16,                                                                                  default = 0)
+    _borders_used: int                  = Retriever(uint16,                                                                                  default = 0)
+    _max_terrain: int                   = Retriever(int16,                                                                                   default = 0)
+    _tile_width: int                    = Retriever(int16,                                                                                   default = 0)
+    _tile_height: int                   = Retriever(int16,                                                                                   default = 0)
+    _tile_half_height: int              = Retriever(int16,                                                                                   default = 0)
+    _tile_half_width: int               = Retriever(int16,                                                                                   default = 0)
+    _elev_height: int                   = Retriever(int16,                                                                                   default = 0)
+    _current_row: int                   = Retriever(int16,                                                                                   default = 0)
+    _current_column: int                = Retriever(int16,                                                                                   default = 0)
+    _block_begin_row: int               = Retriever(int16,                                                                                   default = 0)
+    _block_end_row: int                 = Retriever(int16,                                                                                   default = 0)
+    _block_begin_column: int            = Retriever(int16,                                                                                   default = 0)
+    _block_end_column: int              = Retriever(int16,                                                                                   default = 0)
+    _search_map_ptr: bytes              = Retriever(Bytes[4],                          min_ver = Version((5, 7)),                            default = 0)
+    _search_map_rows_ptr: bytes         = Retriever(Bytes[4],                          min_ver = Version((5, 7)),                            default = 0)
+    _any_frame_change_aoe1: int         = Retriever(int32,                                                        max_ver = Version((4, 5)), default = 0)
+    _any_frame_change_aoe2: int         = Retriever(int8,                              min_ver = Version((5, 7)),                            default = 0)
+    _search_map_ptr_aoe1: int           = Retriever(Bytes[4],                                                     max_ver = Version((4, 5)), default = 0)
+    _search_map_rows_ptr_aoe1: int      = Retriever(Bytes[4],                                                     max_ver = Version((4, 5)), default = 0)
+    _map_visible_flag: int              = Retriever(int8,                                                                                    default = 0)
+    _fog_flag: int                      = Retriever(int8,                                                                                    default = 0)
+    _terrain_blob0_swgb: int            = Retriever(FixedLenArray[uint8, 25],          min_ver = Version((5, 9)), max_ver = Version((5, 9)), default_factory = lambda _: [0] * 25)
+    _terrain_blob1_swgb: int            = Retriever(FixedLenArray[uint32, 157],        min_ver = Version((5, 9)), max_ver = Version((5, 9)), default_factory = lambda _: [0] * 157)
+    _terrain_blob0_aoe1: int            = Retriever(FixedLenArray[uint8, 2],                                      max_ver = Version((4, 5)), default_factory = lambda _: [0] * 2)
+    _terrain_blob1_aoe1: int            = Retriever(FixedLenArray[uint32, 5],                                     max_ver = Version((4, 5)), default_factory = lambda _: [0] * 5)
+    _terrain_blob0_aoe2: int            = Retriever(FixedLenArray[uint8, 21],          min_ver = Version((5, 7)), max_ver = Version((5, 7)), default_factory = lambda _: [0] * 21)
+    _terrain_blob1_aoe2: int            = Retriever(FixedLenArray[uint32, 157],        min_ver = Version((5, 7)), max_ver = Version((5, 7)), default_factory = lambda _: [0] * 157)
     # @formatter:on

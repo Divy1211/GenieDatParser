@@ -4,7 +4,7 @@ from binary_file_parser import BaseStruct, Retriever, Version
 from binary_file_parser.types import int16, uint32
 
 
-class SpriteAttackSound(BaseStruct):
+class FacetAttackSound(BaseStruct):
     # @formatter:off
     sound_delay1: int    = Retriever(int16,                             default = 0)
     sound_id1: int       = Retriever(int16,                             default = 0)
