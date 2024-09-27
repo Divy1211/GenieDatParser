@@ -5,6 +5,7 @@ from binary_file_parser.types import int32
 
 
 class MapElevation(BaseStruct):
+    # @formatter:off
     percent: int            = Retriever(int32,  default = 0)
     terrain: int            = Retriever(int32,  default = 0)
     """aka height"""
@@ -15,3 +16,4 @@ class MapElevation(BaseStruct):
     """aka base_terrain_type"""
     tile_spacing: int       = Retriever(int32,  default = 0)
     """aka nase_elevation"""
+    # @formatter:on

@@ -13,5 +13,5 @@ class TerrainPassGraphic(BaseStruct):
     walk_sprite_rate: float           = Retriever(float32, min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = 1)
     _replication_amount_de2: int      = Retriever(int32,   min_ver = Version((7, 7)),                            default = 1)
 
-    replication_amount: int           = RetrieverCombiner([_replication_amount_de2, _replication_amount_de1_aoe2])
+    replication_amount: int           = RetrieverCombiner(_replication_amount_de2, _replication_amount_de1_aoe2)
     # @formatter:on

@@ -5,6 +5,7 @@ from binary_file_parser.types import int32, int8, int16
 
 
 class MapUnit(BaseStruct):
+    # @formatter:off
     type: int                       = Retriever(int32,  default = 0)
     terrain_type: int               = Retriever(int32,  default = 0)
     group_flag: int                 = Retriever(int8,   default = 0)
@@ -20,3 +21,4 @@ class MapUnit(BaseStruct):
     "aka land_id"
     min_distance_to_players: int    = Retriever(int32,  default = 0)
     max_distance_to_players: int    = Retriever(int32,  default = 0)
+    # @formatter:on

@@ -30,9 +30,9 @@ class Terrain(BaseStruct):
     _hide_in_editor_de2: bool                   = Retriever(bool8,             min_ver = Version((7, 1)),                            default = False)
     _str_id_de2: int                            = Retriever(int32,             min_ver = Version((7, 1)),                            default = 0)
 
-    is_water: bool                              = RetrieverCombiner([_is_water_de2, _is_water_de1])
-    hide_in_editor: bool                        = RetrieverCombiner([_hide_in_editor_de2, _hide_in_editor_de1])
-    str_id: int                                 = RetrieverCombiner([_str_id_de2, _str_id_de1])
+    is_water: bool                              = RetrieverCombiner(_is_water_de2, _is_water_de1)
+    hide_in_editor: bool                        = RetrieverCombiner(_hide_in_editor_de2, _hide_in_editor_de1)
+    str_id: int                                 = RetrieverCombiner(_str_id_de2, _str_id_de1)
 
     _blend_priority_de1: int                    = Retriever(int16,             min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = 0)
     _blend_mode_de1: int                        = Retriever(int16,             min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = 0)
@@ -56,8 +56,8 @@ class Terrain(BaseStruct):
     _internal_name_swgb: str                    = Retriever(FixedLenNTStr[17], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = "")
     _slp_filename_swgb: str                     = Retriever(FixedLenNTStr[17], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = "")
 
-    internal_name: str                          = RetrieverCombiner([_internal_name_de2, _internal_name_aoe2, _internal_name_de1, _internal_name_aoe1, _internal_name_swgb])
-    slp_filename: str                           = RetrieverCombiner([_slp_filename_de2, _slp_filename_aoe2, _slp_filename_de1, _slp_filename_aoe1, _slp_filename_swgb])
+    internal_name: str                          = RetrieverCombiner(_internal_name_de2, _internal_name_aoe2, _internal_name_de1, _internal_name_aoe1, _internal_name_swgb)
+    slp_filename: str                           = RetrieverCombiner(_slp_filename_de2, _slp_filename_aoe2, _slp_filename_de1, _slp_filename_aoe1, _slp_filename_swgb)
 
     slp_id: int                                 = Retriever(int32,                                                                   default = 0)
     _slp_ptr: bytes                             = Retriever(Bytes[4],                                                                default = b"\x00" * 4)
@@ -69,8 +69,8 @@ class Terrain(BaseStruct):
     _blend_priority_aoe2: int                   = Retriever(int32,             min_ver = Version((5, 7)),                            default = 0)
     _blend_mode_aoe2: int                       = Retriever(int32,             min_ver = Version((5, 7)),                            default = 0)
 
-    blend_priority: int                         = RetrieverCombiner([_blend_priority_aoe2, _blend_priority_de1])
-    blend_mode: int                             = RetrieverCombiner([_blend_mode_aoe2, _blend_mode_de1])
+    blend_priority: int                         = RetrieverCombiner(_blend_priority_aoe2, _blend_priority_de1)
+    blend_mode: int                             = RetrieverCombiner(_blend_mode_aoe2, _blend_mode_de1)
 
     _str_sign3_de2: bytes                       = Retriever(Bytes[2],          min_ver = Version((7, 1)),                            default = b"\x60\x0A")
     overlay_mask_name: str                      = Retriever(str16,             min_ver = Version((7, 1)),                            default = "")
@@ -99,5 +99,5 @@ class Terrain(BaseStruct):
     _phantom_aoe1_de1_aoe2: int                 = Retriever(int16,             min_ver = Version((3, 7)), max_ver = Version((5, 7)), default = 0)
     _phantom_de2: int                           = Retriever(int16,             min_ver = Version((7, 1)),                            default = 0)
 
-    phantom: int                                = RetrieverCombiner([_phantom_de2, _phantom_aoe1_de1_aoe2])
+    phantom: int                                = RetrieverCombiner(_phantom_de2, _phantom_aoe1_de1_aoe2)
     # @formatter:on

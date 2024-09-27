@@ -5,6 +5,7 @@ from binary_file_parser.types import int32
 
 
 class MapTerrain(BaseStruct):
+    # @formatter:off
     percent: int            = Retriever(int32,  default = 0)
     type: int               = Retriever(int32,  default = 0)
     num_clumps: int         = Retriever(int32,  default = 0)
@@ -12,3 +13,4 @@ class MapTerrain(BaseStruct):
     placement_zone: int     = Retriever(int32,  default = 0)
     """aka base_terrain_type"""
     clumpiness_factor: int  = Retriever(int32,  default = 0)
+    # @formatter:on

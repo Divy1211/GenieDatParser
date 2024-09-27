@@ -3,9 +3,9 @@ from __future__ import annotations
 import zlib
 from typing import TYPE_CHECKING
 
-from binary_file_parser import BaseStruct, Retriever, Version
+from binary_file_parser import BaseStruct, Retriever, Version, RetrieverCombiner
 from binary_file_parser.types import (
-    Bytes, Array16
+    Bytes, Array16, Array32, str16, FixedLenNTStr, int8, int16, float32
 )
 
 from src.sections.color_data import ColorData
@@ -31,6 +31,33 @@ def get_num_terrains(struct_ver: Version, num_used_terrains) -> int:
         case (Version((7, _)), _): return 200
 
 
+class EffectCommand(BaseStruct):
+    # @formatter:off
+    type: int = Retriever(int8,    default = 0)
+    a: int    = Retriever(int16,   default = 0)
+    b: int    = Retriever(int16,   default = 0)
+    c: int    = Retriever(int16,   default = 0)
+    d: int    = Retriever(float32, default = 0)
+    # @formatter:on
+
+
+class TechEffect(BaseStruct):
+    # @formatter:off
+    _str_sign_de1: bytes         = Retriever(Bytes[2],           min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = b"\x60\x0A")
+    _name_de1: str               = Retriever(str16,              min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = "")
+
+    _str_sign_de2: bytes         = Retriever(Bytes[2],           min_ver = Version((7, 1)),                            default = b"\x60\x0A")
+    _name_de2: str               = Retriever(str16,              min_ver = Version((7, 1)),                            default = "")
+
+    _name_aoe1: str              = Retriever(FixedLenNTStr[31],  min_ver = Version((3, 7)), max_ver = Version((3, 7)), default = "")
+    _name_aoe2_swgb: str         = Retriever(FixedLenNTStr[31],  min_ver = Version((5, 7)), max_ver = Version((5, 9)), default = "")
+
+    name: str                    = RetrieverCombiner(_name_de2, _name_aoe2_swgb, _name_de1, _name_aoe1)
+
+    effects: list[EffectCommand] = Retriever(Array16[EffectCommand],                                                   default_factory = lambda _: [])
+    # @formatter:on
+
+
 class DatFile(BaseStruct):
     @staticmethod
     def set_num_terrains(_, instance: DatFile):
@@ -45,6 +72,7 @@ class DatFile(BaseStruct):
     sprite_data: SpriteData                  = Retriever(SpriteData,                                                             default_factory = SpriteData)
     terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
     map_data: MapData                        = Retriever(MapData,                                                                default_factory = MapData)
+    tech_effects: list[TechEffect]           = Retriever(Array32[TechEffect],                                                    default_factory = lambda _: [])
     # @formatter:on
 
     @classmethod
