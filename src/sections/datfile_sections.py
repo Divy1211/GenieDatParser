@@ -5,18 +5,19 @@ from typing import TYPE_CHECKING
 
 from binary_file_parser import BaseStruct, Retriever, Version
 from binary_file_parser.types import (
-    Bytes, Array16, Array32
+    Bytes, Array16, Array32, StackedAttrArray16, Option32
 )
 
 from src.sections.color_data import ColorData
 from src.sections.dat_versions import DE_LATEST
 from src.sections.map_data import MapData
 from src.sections.sounds import Sound
-from src.sections.sprite_data import SpriteData
+from src.sections.sprite_data import Sprite
 from src.sections.swgb_data import SwgbData
 from src.sections.tech_effect import TechEffect
 from src.sections.terrain_data import Terrain, TerrainData
 from src.sections.terrain_table_data import TerrainTableData
+from src.sections.unit_data import UnitData
 
 if TYPE_CHECKING:
     from binary_file_parser import ByteStream
@@ -43,10 +44,12 @@ class DatFile(BaseStruct):
     terrain_table_data: TerrainTableData     = Retriever(TerrainTableData,                                                       default_factory = TerrainTableData, on_set = [set_num_terrains])
     color_data: ColorData                    = Retriever(ColorData,                                                              default_factory = ColorData)
     sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = lambda sv: [Sound(sv) for _ in range(685)])
-    sprite_data: SpriteData                  = Retriever(SpriteData,                                                             default_factory = SpriteData)
+    # sprite_data: SpriteData                  = Retriever(SpriteData,                                                             default_factory = SpriteData)
+    sprites: list[Sprite]                    = Retriever(StackedAttrArray16[Option32[Sprite]],                                   default_factory = lambda _: [])
     terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
     map_data: MapData                        = Retriever(MapData,                                                                default_factory = MapData)
     tech_effects: list[TechEffect]           = Retriever(Array32[TechEffect],                                                    default_factory = lambda _: [])
+    unit_data: UnitData                      = Retriever(UnitData,                                                               default_factory = UnitData)
     # @formatter:on
 
     @classmethod
