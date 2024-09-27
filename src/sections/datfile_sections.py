@@ -45,7 +45,7 @@ class DatFile(BaseStruct):
     color_data: ColorData                    = Retriever(ColorData,                                                              default_factory = ColorData)
     sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = lambda sv: [Sound(sv) for _ in range(685)])
     # sprite_data: SpriteData                  = Retriever(SpriteData,                                                             default_factory = SpriteData)
-    sprites: list[Sprite]                    = Retriever(StackedAttrArray16[Option32[Sprite]],                                   default_factory = lambda _: [])
+    sprites: list[Sprite | None]             = Retriever(StackedAttrArray16[Option32[Sprite]],                                   default_factory = lambda _: [])
     terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
     map_data: MapData                        = Retriever(MapData,                                                                default_factory = MapData)
     tech_effects: list[TechEffect]           = Retriever(Array32[TechEffect],                                                    default_factory = lambda _: [])
