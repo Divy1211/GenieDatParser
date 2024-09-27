@@ -10,6 +10,7 @@ from binary_file_parser.types import (
 
 from src.sections.color_data import ColorData
 from src.sections.dat_versions import DE_LATEST
+from src.sections.map_data import MapData
 from src.sections.sounds import Sound
 from src.sections.sprite_data import SpriteData
 from src.sections.swgb_data import SwgbData
@@ -43,6 +44,7 @@ class DatFile(BaseStruct):
     sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = lambda sv: [Sound(sv) for _ in range(685)])
     sprite_data: SpriteData                  = Retriever(SpriteData,                                                             default_factory = SpriteData)
     terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
+    map_data: MapData                        = Retriever(MapData,                                                                default_factory = MapData)
     # @formatter:on
 
     @classmethod
