@@ -38,7 +38,7 @@ class UnitTask(BaseStruct):
     1 - Plunder from player
     2 - Raider thing?
     """
-    work_flag: int                          = Retriever(int16,                             default = 0)
+    work_mode: int                          = Retriever(int16,                             default = 0)
     """unused?"""
     target_diplomacy: int                   = Retriever(int8,                              default = 0)
     """

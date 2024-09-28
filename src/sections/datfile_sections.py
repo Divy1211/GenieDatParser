@@ -8,6 +8,7 @@ from binary_file_parser.types import (
     Bytes, Array16, Array32, StackedAttrArray16, Option32
 )
 
+from src.sections.civilization import Civilization
 from src.sections.color_data import ColorData
 from src.sections.dat_versions import DE_LATEST
 from src.sections.map_data import MapData
@@ -43,13 +44,14 @@ class DatFile(BaseStruct):
     swgb_data: SwgbData                      = Retriever(SwgbData,       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default_factory = SwgbData)
     terrain_table_data: TerrainTableData     = Retriever(TerrainTableData,                                                       default_factory = TerrainTableData, on_set = [set_num_terrains])
     color_data: ColorData                    = Retriever(ColorData,                                                              default_factory = ColorData)
-    sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = lambda sv: [Sound(sv) for _ in range(685)])
+    sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = lambda _: [])
     # sprite_data: SpriteData                  = Retriever(SpriteData,                                                             default_factory = SpriteData)
     sprites: list[Sprite | None]             = Retriever(StackedAttrArray16[Option32[Sprite]],                                   default_factory = lambda _: [])
     terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
     map_data: MapData                        = Retriever(MapData,                                                                default_factory = MapData)
     tech_effects: list[TechEffect]           = Retriever(Array32[TechEffect],                                                    default_factory = lambda _: [])
     unit_data: UnitData                      = Retriever(UnitData,                                                               default_factory = UnitData)
+    civs: list[Civilization]                 = Retriever(Civilization,                                                           default_factory = lambda _: [])
     # @formatter:on
 
     @classmethod

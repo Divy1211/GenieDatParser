@@ -8,8 +8,8 @@ class MapUnit(BaseStruct):
     # @formatter:off
     type: int                       = Retriever(int32,  default = 0)
     terrain_type: int               = Retriever(int32,  default = 0)
-    group_flag: int                 = Retriever(int8,   default = 0)
-    scale_flag: int                 = Retriever(int8,   default = 0)
+    group_mode: int                 = Retriever(int8,   default = 0)
+    scale_mode: int                 = Retriever(int8,   default = 0)
     _padding1: int                  = Retriever(int16,  default = 0)
     group_size: int                 = Retriever(int32,  default = 0)
     group_size_delta: int           = Retriever(int32,  default = 0)

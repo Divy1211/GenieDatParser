@@ -5,7 +5,7 @@ from binary_file_parser.types import Array16, bool32
 
 from src.sections.sprite_data.sprite import Sprite
 
-
+# todo: remove this file
 class SpriteData(BaseStruct):
     @staticmethod
     def set_sprite_repeat(_, instance: SpriteData):

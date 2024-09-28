@@ -3,7 +3,7 @@ from __future__ import annotations
 from binary_file_parser import BaseStruct, Retriever, Version, RetrieverCombiner
 from binary_file_parser.types import int16, uint16, int32
 
-from src.sections.sounds.sound_item import SoundFile
+from src.sections.sounds.sound_file import SoundFile
 
 
 class Sound(BaseStruct):

@@ -16,7 +16,7 @@ class MapLand(BaseStruct):
     x: int                       = Retriever(int32,   default = 0)
     y: int                       = Retriever(int32,   default = 0)
     land_usage_percent: int      = Retriever(int8,    default = 0)
-    by_player_flag: int          = Retriever(int8,    default = 0)
+    by_player_mode: int          = Retriever(int8,    default = 0)
     _padding2: int               = Retriever(int16,   default = 0)
     start_area_radius: int       = Retriever(int32,   default = 0)
     terrain_edge_fade: int       = Retriever(int32,   default = 0)
