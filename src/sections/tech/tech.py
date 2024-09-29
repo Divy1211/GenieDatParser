@@ -18,7 +18,7 @@ class Tech(BaseStruct):
     min_required_techs: int                         = Retriever(int16,                                                                         default = 0)
 
     civilization_id: int                            = Retriever(int16,                   min_ver = Version((5, 7)),                            default = -1)
-    is_available_in_full_tech_tree: bool            = Retriever(bool16,                  min_ver = Version((5, 7)),                            default = True)
+    full_tech_tree_mode: int                        = Retriever(int16,                  min_ver = Version((5, 7)),                            default = True)
     location_unit_id: int                           = Retriever(int16,                                                                         default = -1)
 
     _name_str_id1: int                              = Retriever(uint16,                  min_ver = Version((3, 7)), max_ver = Version((7, 4)), default = 0)

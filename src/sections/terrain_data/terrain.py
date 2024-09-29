@@ -13,18 +13,18 @@ from src.sections.terrain_data.terrain_unit import TerrainUnit
 
 class Terrain(BaseStruct):
     # @formatter:off
-    enabled: bool                               = Retriever(bool8,                                                                      default = False)
+    enabled: bool                               = Retriever(bool8,                                                                      default = True)
     random: int                                 = Retriever(int8,                                                                       default = 0)
 
-    _is_water_de1: bool                         = Retriever(bool8,             min_ver = Version((4, 5)), max_ver = Version((4, 5)),    default = False)
+    _type_de1: int                              = Retriever(int8,             min_ver = Version((4, 5)), max_ver = Version((4, 5)),    default = False)
     _hide_in_editor_de1: bool                   = Retriever(bool8,             min_ver = Version((4, 5)), max_ver = Version((4, 5)),    default = False)
     _str_id_de1: int                            = Retriever(int32,             min_ver = Version((4, 5)), max_ver = Version((4, 5)),    default = 0)
 
-    _is_water_de2: bool                         = Retriever(bool8,             min_ver = Version((7, 1)),                               default = False)
+    _type_de2: int                              = Retriever(int8,             min_ver = Version((7, 1)),                               default = False)
     _hide_in_editor_de2: bool                   = Retriever(bool8,             min_ver = Version((7, 1)),                               default = False)
     _str_id_de2: int                            = Retriever(int32,             min_ver = Version((7, 1)),                               default = 0)
 
-    is_water: bool                              = RetrieverCombiner(_is_water_de2, _is_water_de1)
+    type: int                                   = RetrieverCombiner(_type_de2, _type_de1)
     hide_in_editor: bool                        = RetrieverCombiner(_hide_in_editor_de2, _hide_in_editor_de1)
     str_id: int                                 = RetrieverCombiner(_str_id_de2, _str_id_de1)
 

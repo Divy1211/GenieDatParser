@@ -3,7 +3,7 @@ from __future__ import annotations
 from binary_file_parser import BaseStruct, Retriever, Version, RetrieverCombiner
 from binary_file_parser.types import (
     int8, Bytes, str16, FixedLenNTStr, uint16, int16, FixedLenArray, float32, uint8,
-    StackedAttrArray16, Option32, Array16, bool32
+    StackedAttrArray16, Option32
 )
 
 from src.sections.civilization.unit import Unit

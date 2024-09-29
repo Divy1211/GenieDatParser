@@ -52,7 +52,7 @@ class Sprite(BaseStruct):
     force_player_color: int                     = Retriever(int8,                                                                       default = 0)
     layer: int                                  = Retriever(int8,                                                                       default = 0)
     color_table: int                            = Retriever(int16,                                                                      default = -1)
-    transparent_selection: bool                 = Retriever(bool8,                                                                      default = False)
+    transparent_selection: int                  = Retriever(int8,                                                                       default = 2)
     bounding_box: list[int]                     = Retriever(FixedLenArray[uint16, 4],                                                   default_factory = lambda _: [0] * 4)
     num_deltas: int                             = Retriever(uint16,                                                                     default = 0, on_write = [sync_repeats])
     sound_id: int                               = Retriever(int16,                                                                      default = -1)

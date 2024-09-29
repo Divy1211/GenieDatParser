@@ -29,7 +29,7 @@ class UnitTask(BaseStruct):
 
     auto_search_targets: bool               = Retriever(bool8,                             default = False)
     search_wait_time: float                 = Retriever(float32,                           default = 0)
-    enable_targeting: bool                  = Retriever(bool8,                             default = False)
+    enable_targeting: int                   = Retriever(int8,                              default = 0)
     combat_level: int                       = Retriever(int8,                              default = 0)
     gather_type: int                        = Retriever(int16,                             default = 0)
     """
