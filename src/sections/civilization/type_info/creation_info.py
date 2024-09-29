@@ -10,8 +10,8 @@ class CreationInfo(BaseStruct):
     # @formatter:off
     costs: list[UnitCost]                       = Retriever(FixedLenArray[UnitCost, 3],                                        default_factory = lambda sv: [UnitCost(sv) for _ in range(3)])
     train_time: int                             = Retriever(int16,                                                             default = 0)
-    train_location_unit_id: int                 = Retriever(int16,                                                             default = -1)
-    train_button_id: int                        = Retriever(int8,                                                              default = 0)
+    location_unit_id: int                       = Retriever(int16,                                                             default = -1)
+    button_id: int                              = Retriever(int8,                                                              default = 0)
 
     rear_attack_modifier: float                 = Retriever(float32,    min_ver = Version((5, 7)),                             default = 0)
     """aka heal_timer"""

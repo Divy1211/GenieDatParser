@@ -15,6 +15,7 @@ from src.sections.map_data import MapData
 from src.sections.sounds import Sound
 from src.sections.sprite_data import Sprite
 from src.sections.swgb_data import SwgbData
+from src.sections.tech import Tech
 from src.sections.tech_effect import TechEffect
 from src.sections.terrain_data import TerrainData
 from src.sections.terrain_table_data import TerrainTableData
@@ -48,8 +49,9 @@ class DatFile(BaseStruct):
     tech_effects: list[TechEffect]           = Retriever(Array32[TechEffect],                                                    default_factory = lambda _: [])
     unit_data: UnitData                      = Retriever(UnitData,                                                               default_factory = UnitData)
     civilizations: list[Civilization]        = Retriever(Array16[Civilization],                                                  default_factory = lambda _: [])
-    unknown_swgb: int                        = Retriever(Bytes[1],       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default = 0)
-    # technologies: list[Technology]
+    unknown_swgb1: int                       = Retriever(Bytes[1],       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default = b"\x00")
+    technologies: list[Tech]                 = Retriever(Array16[Tech],                                                          default_factory = lambda _: [])
+    unknown_swgb2: int                       = Retriever(Bytes[1],       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default = b"\x00")
     # @formatter:on
 
     @classmethod
