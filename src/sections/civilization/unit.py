@@ -55,14 +55,20 @@ class Unit(BaseStruct):
             Retriever.set_repeat(Unit.projectile_info, instance, -1)
 
     @staticmethod
-    def set_name_len(_, instance: Unit):
-        Unit._name_aoe1.dtype.length = instance._len_name_aoe1
+    def set_name_aoe2_len(_, instance: Unit):
         Unit._name_aoe2_swgb.dtype.length = instance._len_name_aoe2_swgb
 
     @staticmethod
-    def sync_name_len(_, instance: Unit):
-        Unit._name_aoe1.dtype.length = instance._len_name_aoe1 = len(instance._name_aoe1)
+    def sync_name_aoe2_len(_, instance: Unit):
         Unit._name_aoe2_swgb.dtype.length = instance._len_name_aoe2_swgb = len(instance._name_aoe2_swgb)
+
+    @staticmethod
+    def set_name_aoe1_len(_, instance: Unit):
+        Unit._name_aoe1.dtype.length = instance._len_name_aoe1
+
+    @staticmethod
+    def sync_name_aoe1_len(_, instance: Unit):
+        Unit._name_aoe1.dtype.length = instance._len_name_aoe1 = len(instance._name_aoe1)
 
     @staticmethod
     def sync_ids(_, instance: Unit):
@@ -71,8 +77,8 @@ class Unit(BaseStruct):
     # @formatter:off
     base_class: int                          = Retriever(int8,                                                                 default = UnitType.EyeCandy, on_read = [disable_types])
 
-    _len_name_aoe1: int                      = Retriever(uint16,         min_ver = Version((3, 7)), max_ver = Version((3, 7)), default = 0)
-    _len_name_aoe2_swgb: int                 = Retriever(uint16,         min_ver = Version((5, 7)), max_ver = Version((5, 9)), default = 0, on_read = [set_name_len], on_write = [sync_name_len])
+    _len_name_aoe1: int                      = Retriever(uint16,         min_ver = Version((3, 7)), max_ver = Version((3, 7)), default = 0, on_read = [set_name_aoe1_len], on_write = [sync_name_aoe1_len])
+    _len_name_aoe2_swgb: int                 = Retriever(uint16,         min_ver = Version((5, 7)), max_ver = Version((5, 9)), default = 0, on_read = [set_name_aoe2_len], on_write = [sync_name_aoe2_len])
 
     id: int                                  = Retriever(int16,                                                                default = -1, on_write = [sync_ids])
 
