@@ -8,13 +8,14 @@ from src.sections.civilization.type_info.damage_class import DamageClass
 
 class CombatInfo(BaseStruct):
     # @formatter:off
-    _base_armor_aoe1: int              = Retriever(uint8, min_ver = Version((3, 7)), max_ver = Version((3, 7)),                        default = 232)
-    _base_armor_de1: int               = Retriever(int16, min_ver = Version((4, 5)), max_ver = Version((4, 5)),                        default = 1000)
-    _base_armor_aoe2: int              = Retriever(int16, min_ver = Version((5, 7)), max_ver = Version((5, 7)),                        default = 1000) # todo: AoK
-    _base_armor_swgb: int              = Retriever(int16, min_ver = Version((5, 9)), max_ver = Version((5, 9)),                        default = 1000)
+    _base_armor_aoe1: int              = Retriever(uint8, min_ver = Version((3, 7)),    max_ver = Version((3, 7)),                     default = 232)
+    _base_armor_de1: int               = Retriever(int16, min_ver = Version((4, 5)),    max_ver = Version((4, 5)),                     default = 1000)
+    _base_armor_aok: int               = Retriever(uint8, min_ver = Version((5, 7, 0)), max_ver = Version((5, 7, 0)),                  default = 232)
+    _base_armor_aoc: int               = Retriever(int16, min_ver = Version((5, 7, 1)), max_ver = Version((5, 7, 2)),                  default = 1000)
+    _base_armor_swgb: int              = Retriever(int16, min_ver = Version((5, 9)),    max_ver = Version((5, 9)),                     default = 1000)
     _base_armor_de2: int               = Retriever(int16, min_ver = Version((7, 1)),                                                   default = 10_000)
 
-    base_armor: int                    = RetrieverCombiner(_base_armor_de2, _base_armor_aoe2, _base_armor_de1, _base_armor_aoe1, _base_armor_swgb)
+    base_armor: int                    = RetrieverCombiner(_base_armor_de2, _base_armor_aoc, _base_armor_aok, _base_armor_de1, _base_armor_aoe1, _base_armor_swgb)
 
     attacks: list[int]                 = Retriever(Array16[DamageClass], min_ver = Version((3, 7)),                                    default_factory = lambda _: [])
     armors: list[int]                  = Retriever(Array16[DamageClass], min_ver = Version((3, 7)),                                    default_factory = lambda _: [])

@@ -10,7 +10,7 @@ from src.sections.civilization.type_info.looting_table import LootingTable
 class BuildingInfo(BaseStruct):
     # @formatter:off
     construction_sprite_id: int        = Retriever(int16,                                                                default = -1)
-    snow_sprite_id: int                = Retriever(int16,                            min_ver = Version((5, 7)),          default = -1) # todo: AoK
+    snow_sprite_id: int                = Retriever(int16,                            min_ver = Version((5, 7, 1)),       default = -1)
     destruction_sprite_id: int         = Retriever(int16,                            min_ver = Version((7, 1)),          default = -1)
     destruction_rubble_sprite_id: int  = Retriever(int16,                            min_ver = Version((7, 1)),          default = -1)
     research_sprite_id: int            = Retriever(int16,                            min_ver = Version((7, 1)),          default = -1)

@@ -161,9 +161,9 @@ class Unit(BaseStruct):
     _obstruction_type_aoe2_swgb_de2: int     = Retriever(int8,           min_ver = Version((5, 7)),                            default = 0)
     _obstruction_class_aoe2_swgb_de2: int    = Retriever(int8,           min_ver = Version((5, 7)),                            default = 0)
     """aka selection_shape"""
-    trait: int                               = Retriever(uint8,          min_ver = Version((5, 7)),                            default = 0) # todo: AoK
-    civilization_id: int                     = Retriever(int8,           min_ver = Version((5, 7)),                            default = 0) # todo: AoK
-    trait_piece: int                         = Retriever(int16,          min_ver = Version((5, 7)),                            default = 0) # todo: AoK
+    trait: int                               = Retriever(uint8,          min_ver = Version((5, 7, 1)),                         default = 0)
+    civilization_id: int                     = Retriever(int8,           min_ver = Version((5, 7, 1)),                         default = 0)
+    trait_piece: int                         = Retriever(int16,          min_ver = Version((5, 7, 1)),                         default = 0)
     """likely unused"""
 
     _obstruction_type_de1: int               = Retriever(int8,           min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = 0)

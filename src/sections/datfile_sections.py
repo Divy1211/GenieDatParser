@@ -5,11 +5,10 @@ from typing import TYPE_CHECKING
 
 from binary_file_parser import BaseStruct, Retriever, Version
 from binary_file_parser.types import (
-    Bytes, Array16, Array32, StackedAttrArray16, Option32, uint8, int16
+    Bytes, Array16, Array32, StackedAttrArray16, Option32, int16
 )
 
-from src.sections.civilization import Civilization, Unit
-from src.sections.civilization.type_info import CombatInfo
+from src.sections.civilization import Civilization
 from src.sections.color_data import ColorData
 from src.sections.dat_versions import DE_LATEST
 from src.sections.map_data import MapData
@@ -17,13 +16,14 @@ from src.sections.sounds import Sound
 from src.sections.sprite_data import Sprite
 from src.sections.swgb_data import SwgbData
 from src.sections.tech_effect import TechEffect
-from src.sections.terrain_data import Terrain, TerrainData
+from src.sections.terrain_data import TerrainData
 from src.sections.terrain_table_data import TerrainTableData
 from src.sections.unit_data import UnitData
 
 if TYPE_CHECKING:
     from binary_file_parser import ByteStream
 
+# unused, just for info
 def get_num_terrains(struct_ver: Version, num_used_terrains) -> int:
     match (struct_ver, num_used_terrains):
         case (Version((3, 7)), _): return 32
@@ -36,29 +36,20 @@ def get_num_terrains(struct_ver: Version, num_used_terrains) -> int:
 
 
 class DatFile(BaseStruct):
-    @staticmethod
-    def set_num_terrains(_, instance: DatFile):
-        Terrain.num_terrains = get_num_terrains(instance.struct_ver, instance.terrain_table_data.num_used_terrains)
-        if instance.struct_ver == (5, 7) and Terrain.num_terrains == 32:
-            CombatInfo._base_armor_aoe2.dtype = uint8
-            CombatInfo._base_armor_aoe2.default = 232
-            Unit.trait._repeat = -1
-            Unit.civilization_id._repeat = -1
-            Unit.trait_piece._repeat = -1
-
     # @formatter:off
     file_version: bytes                      = Retriever(Bytes[8],                                                               default = b"VER 7.8\x00")
     swgb_data: SwgbData                      = Retriever(SwgbData,       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default_factory = SwgbData)
-    terrain_table_data: TerrainTableData     = Retriever(TerrainTableData,                                                       default_factory = TerrainTableData, on_set = [set_num_terrains])
+    terrain_table_data: TerrainTableData     = Retriever(TerrainTableData,                                                       default_factory = TerrainTableData)
     color_data: ColorData                    = Retriever(ColorData,                                                              default_factory = ColorData)
     sounds: list[Sound]                      = Retriever(Array16[Sound],                                                         default_factory = lambda _: [])
-    # sprite_data: SpriteData                  = Retriever(SpriteData,                                                             default_factory = SpriteData)
     sprites: list[Sprite | None]             = Retriever(StackedAttrArray16[Option32[Sprite]],                                   default_factory = lambda _: [])
     terrain_data: TerrainData                = Retriever(TerrainData,                                                            default_factory = TerrainData)
     map_data: MapData                        = Retriever(MapData,                                                                default_factory = MapData)
     tech_effects: list[TechEffect]           = Retriever(Array32[TechEffect],                                                    default_factory = lambda _: [])
     unit_data: UnitData                      = Retriever(UnitData,                                                               default_factory = UnitData)
-    civs: list[Civilization]                 = Retriever(Array16[Civilization],                                                  default_factory = lambda _: [])
+    civilizations: list[Civilization]        = Retriever(Array16[Civilization],                                                  default_factory = lambda _: [])
+    unknown_swgb: int                        = Retriever(Bytes[1],       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default = 0)
+    # technologies: list[Technology]
     # @formatter:on
 
     @classmethod
@@ -78,7 +69,16 @@ class DatFile(BaseStruct):
         struct_ver: Version = Version((0,)),
     ) -> Version:
         ver_str = stream.peek(8)[4:-1].decode("ASCII")
-        return Version(map(int, ver_str.split(".")))
+        ver = Version(map(int, ver_str.split(".")))
+        if ver != Version((5, 7)):
+            return ver
+        num_terrains = int16._from_bytes(stream.peek(12)[-2:])
+        if num_terrains == 32:
+            return Version((5, 7, 0)) # AoK
+        if num_terrains == 41:
+            return Version((5, 7, 1)) # AoC/HD
+        if num_terrains == 100:
+            return Version((5, 7, 2)) # HD DLCs
 
     def __init__(self, struct_ver: Version = DE_LATEST, initialise_defaults: bool = True, **retriever_inits):
         super().__init__(struct_ver, initialise_defaults, **retriever_inits)
