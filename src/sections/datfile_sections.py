@@ -5,10 +5,11 @@ from typing import TYPE_CHECKING
 
 from binary_file_parser import BaseStruct, Retriever, Version
 from binary_file_parser.types import (
-    Bytes, Array16, Array32, StackedAttrArray16, Option32
+    Bytes, Array16, Array32, StackedAttrArray16, Option32, uint8, int16
 )
 
-from src.sections.civilization import Civilization
+from src.sections.civilization import Civilization, Unit
+from src.sections.civilization.type_info import CombatInfo
 from src.sections.color_data import ColorData
 from src.sections.dat_versions import DE_LATEST
 from src.sections.map_data import MapData
@@ -28,7 +29,7 @@ def get_num_terrains(struct_ver: Version, num_used_terrains) -> int:
         case (Version((3, 7)), _): return 32
         case (Version((4, 5)), _): return 96
         case (Version((5, 7)), 32): return 32
-        case (Version((5, 7)), 41): return 32
+        case (Version((5, 7)), 41): return 42
         case (Version((5, 7)), 100): return 100
         case (Version((5, 9)), _): return 55
         case (Version((7, _)), _): return 200
@@ -38,6 +39,12 @@ class DatFile(BaseStruct):
     @staticmethod
     def set_num_terrains(_, instance: DatFile):
         Terrain.num_terrains = get_num_terrains(instance.struct_ver, instance.terrain_table_data.num_used_terrains)
+        if instance.struct_ver == (5, 7) and Terrain.num_terrains == 32:
+            CombatInfo._base_armor_aoe2.dtype = uint8
+            CombatInfo._base_armor_aoe2.default = 232
+            Unit.trait._repeat = -1
+            Unit.civilization_id._repeat = -1
+            Unit.trait_piece._repeat = -1
 
     # @formatter:off
     file_version: bytes                      = Retriever(Bytes[8],                                                               default = b"VER 7.8\x00")
@@ -51,7 +58,7 @@ class DatFile(BaseStruct):
     map_data: MapData                        = Retriever(MapData,                                                                default_factory = MapData)
     tech_effects: list[TechEffect]           = Retriever(Array32[TechEffect],                                                    default_factory = lambda _: [])
     unit_data: UnitData                      = Retriever(UnitData,                                                               default_factory = UnitData)
-    civs: list[Civilization]                 = Retriever(Civilization,                                                           default_factory = lambda _: [])
+    civs: list[Civilization]                 = Retriever(Array16[Civilization],                                                  default_factory = lambda _: [])
     # @formatter:on
 
     @classmethod

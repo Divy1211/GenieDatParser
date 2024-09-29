@@ -3,7 +3,7 @@ from __future__ import annotations
 from binary_file_parser import BaseStruct, Retriever, Version, RetrieverCombiner
 from binary_file_parser.types import (
     int8, Bytes, str16, FixedLenNTStr, uint16, int16, FixedLenArray, float32, uint8,
-    StackedAttrArray16, Option32
+    StackedAttrArray16, Option32, Array16, bool32
 )
 
 from src.sections.civilization.unit import Unit
@@ -34,7 +34,7 @@ class Civilization(BaseStruct):
     name2: str                        = Retriever(FixedLenNTStr[20],       min_ver = Version((5, 9)), max_ver = Version((5, 9)), default = 0)
     unique_unit_effect_ids: list[int] = Retriever(FixedLenArray[int16, 4], min_ver = Version((5, 9)), max_ver = Version((5, 9)), default_factory = lambda _: [0] * 4)
 
-    resources: list[float]            = Retriever(float32,                                                                       default = 0)
+    resources: list[float]            = Retriever(float32,                                                                       default = 0, repeat = 0)
     icon_set: int                     = Retriever(uint8,                                                                         default = 0)
 
     units: list[Unit | None]          = Retriever(StackedAttrArray16[Option32[Unit]],                                            default_factory = lambda _: [])

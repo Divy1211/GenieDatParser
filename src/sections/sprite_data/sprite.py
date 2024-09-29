@@ -12,20 +12,14 @@ from src.sections.sprite_data.sprite_delta import SpriteDelta
 
 class Sprite(BaseStruct):
     @staticmethod
-    def set_deltas_repeat(_, instance: Sprite):
+    def set_repeats(_, instance: Sprite):
         Retriever.set_repeat(Sprite.deltas, instance, instance.num_deltas)
-
-    @staticmethod
-    def set_attack_sound_repeat(_, instance: Sprite):
         if instance.facets_have_attack_sounds:
             Retriever.set_repeat(Sprite.facet_attack_sounds, instance, instance.num_facets)
 
     @staticmethod
-    def sync_num_deltas(_, instance: Sprite):
+    def sync_repeats(_, instance: Sprite):
         instance.num_deltas = len(instance.deltas)
-
-    @staticmethod
-    def sync_num_facet_attack_sounds(_, instance: Sprite):
         if (n := len(instance.facet_attack_sounds)) > 0:
             instance.facets_have_attack_sounds = True
             instance.num_facets = n
@@ -60,13 +54,13 @@ class Sprite(BaseStruct):
     color_table: int                            = Retriever(int16,                                                                   default = -1)
     transparent_selection: bool                 = Retriever(bool8,                                                                   default = False)
     bounding_box: list[int]                     = Retriever(FixedLenArray[uint16, 4],                                                default_factory = lambda _: [0] * 4)
-    num_deltas: int                             = Retriever(uint16,                                                                  default = 0, on_read = [set_deltas_repeat], on_write = [sync_num_deltas])
+    num_deltas: int                             = Retriever(uint16,                                                                  default = 0, on_write = [sync_repeats])
     sound_id: int                               = Retriever(int16,                                                                   default = -1)
     wwise_sound_id: int                         = Retriever(int32,             min_ver = Version((7, 1)),                            default = 0)
 
-    facets_have_attack_sounds: bool             = Retriever(bool8,                                                                   default = False, on_write = [sync_num_facet_attack_sounds])
+    facets_have_attack_sounds: bool             = Retriever(bool8,                                                                   default = False)
     num_frames: int                             = Retriever(uint16,                                                                  default = 0)
-    num_facets: int                             = Retriever(uint16,                                                                  default = 0, on_read = [set_attack_sound_repeat])
+    num_facets: int                             = Retriever(uint16,                                                                  default = 0, on_read = [set_repeats])
 
     speed_mult: float                           = Retriever(float32,                                                                 default = 0)
     frame_rate: float                           = Retriever(float32,                                                                 default = 0)

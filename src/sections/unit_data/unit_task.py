@@ -1,26 +1,25 @@
 from __future__ import annotations
 
 from binary_file_parser import BaseStruct, Retriever, Version
-from binary_file_parser.types import int16, int8, float32, uint32, bool16, bool8
+from binary_file_parser.types import int16, int8, float32, uint32, bool8
 
 
 class UnitTask(BaseStruct):
-    used: bool                              = Retriever(bool16,                            default = True)
-    """aka task_type"""
-    id: int                                 = Retriever(int16,                             default = 0)
-    is_default: int                         = Retriever(int8,                              default = 0)
+    task_type: int                          = Retriever(int16,                             default = True)
+    id: int                                 = Retriever(int16,                             default = -1)
+    is_default: bool                        = Retriever(bool8,                             default = False)
 
     action_type: int                        = Retriever(int16,                             default = 0)
 
-    unit_class_id: int                      = Retriever(int16,                             default = 0)
-    unit_type: int                          = Retriever(int16,                             default = 0)
-    terrain_type: int                       = Retriever(int16,                             default = 0)
+    unit_class_id: int                      = Retriever(int16,                             default = -1)
+    unit_type: int                          = Retriever(int16,                             default = -1)
+    terrain_type: int                       = Retriever(int16,                             default = -1)
 
-    resource_in: int                        = Retriever(int16,                             default = 0)
-    productivity_resource: int              = Retriever(int16,                             default = 0)
+    resource_in: int                        = Retriever(int16,                             default = -1)
+    productivity_resource: int              = Retriever(int16,                             default = -1)
     """the value of this resource is used as a multiplier for work_value1"""
-    resource_out: int                       = Retriever(int16,                             default = 0)
-    unused_resource: int                    = Retriever(int16,                             default = 0)
+    resource_out: int                       = Retriever(int16,                             default = -1)
+    unused_resource: int                    = Retriever(int16,                             default = -1)
 
     work_value1: float                      = Retriever(float32,                           default = 0)
     """min_conversion_time"""
@@ -54,13 +53,13 @@ class UnitTask(BaseStruct):
     check_target_resource: bool             = Retriever(bool8,                             default = False)
     is_build_task: bool                     = Retriever(bool8,                             default = False)
 
-    move_sprite_id: int                     = Retriever(int16,                             default = 0)
-    proceed_sprite_id: int                  = Retriever(int16,                             default = 0)
-    work_sprite_id: int                     = Retriever(int16,                             default = 0)
-    carry_sprite_id: int                    = Retriever(int16,                             default = 0)
+    move_sprite_id: int                     = Retriever(int16,                             default = -1)
+    proceed_sprite_id: int                  = Retriever(int16,                             default = -1)
+    work_sprite_id: int                     = Retriever(int16,                             default = -1)
+    carry_sprite_id: int                    = Retriever(int16,                             default = -1)
 
-    resource_gather_sound_id: int           = Retriever(int16,                             default = 0)
-    resource_deposit_sound_id: int          = Retriever(int16,                             default = 0)
+    resource_gather_sound_id: int           = Retriever(int16,                             default = -1)
+    resource_deposit_sound_id: int          = Retriever(int16,                             default = -1)
 
     wwise_resource_gather_sound_id: int     = Retriever(uint32, min_ver = Version((7, 1)), default = 0)
     wwise_resource_deposit_sound_id: int    = Retriever(uint32, min_ver = Version((7, 1)), default = 0)

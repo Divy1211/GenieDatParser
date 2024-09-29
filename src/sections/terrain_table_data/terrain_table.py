@@ -16,6 +16,6 @@ class TerrainTable(BaseStruct):
 
     # @formatter:off
     _void                                                 = Retriever(void,                             on_read = [set_repeat])
-    passable_buildable_dmg_mult: list[int]                = Retriever(float32,            default = 0)
-    terrain_pass_graphics: list[TerrainPassGraphic]       = Retriever(TerrainPassGraphic, default = 0)
+    passable_buildable_dmg_mult: list[int]                = Retriever(float32,            default = 0, repeat = 0)
+    terrain_pass_graphics: list[TerrainPassGraphic]       = Retriever(TerrainPassGraphic, default = 0, repeat = 0)
     # @formatter:on

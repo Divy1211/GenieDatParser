@@ -91,7 +91,7 @@ class Terrain(BaseStruct):
     cols: int                                   = Retriever(int16,                                                                   default = 0)
 
     _void: bytes                                = Retriever(void,              min_ver = Version((3, 7)), max_ver = Version((5, 9)), default = b"", on_set = [set_borders_repeat])
-    borders: list[int]                          = Retriever(int16,             min_ver = Version((3, 7)), max_ver = Version((5, 9)), default = 0, repeat = 0)
+    borders: list[int]                          = Retriever(int16,             min_ver = Version((3, 7)), max_ver = Version((5, 9)), default = 0, repeat = 200) # todo: fixed len array based on version
 
     units: list[TerrainUnit]                    = Retriever(StackedAttrArray8[TerrainUnit, 30],                                      default_factory = lambda sv: [TerrainUnit(sv) for _ in range(30)])
     num_units_used: int                         = Retriever(int16,                                                                   default = 0)

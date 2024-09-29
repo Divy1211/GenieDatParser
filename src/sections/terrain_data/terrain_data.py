@@ -26,7 +26,7 @@ class TerrainData(BaseStruct):
     _padding1: int                      = Retriever(int16,                                                                                   default = 0)
 
     _void: bytes                        = Retriever(void,                                                                                    default = b"", on_set = [set_terrain_repeat])
-    terrains: list[Terrain]             = Retriever(Terrain,                                                                                 default_factory = Terrain)
+    terrains: list[Terrain]             = Retriever(Terrain,                                                                                 default_factory = Terrain, repeat = 200) # todo: make this a fixed len array by version
     terrain_border: list[TerrainBorder] = Retriever(FixedLenArray[TerrainBorder, 16],  min_ver = Version((3, 7)), max_ver = Version((5, 9)), default_factory = TerrainBorder)
 
     # all useless... yES

@@ -7,11 +7,10 @@ from binary_file_parser.types import (
 )
 
 from src.sections.civilization.type_info import (
-    AnimationInfo, UnitType, MovementInfo, TaskInfo, CreationInfo, ProjectileData, CombatInfo, BuildingInfo
+    AnimationInfo, UnitType, MovementInfo, TaskInfo, CreationInfo, ProjectileInfo, CombatInfo, BuildingInfo
 )
 from src.sections.civilization.unit_damage_sprite import UnitDamageSprite
 from src.sections.civilization.unit_resource import UnitResource
-
 
 class Unit(BaseStruct):
     @staticmethod
@@ -52,6 +51,8 @@ class Unit(BaseStruct):
         elif instance.base_class < UnitType.Building:
             Retriever.set_repeat(Unit.projectile_info, instance, -1)
             Retriever.set_repeat(Unit.building_info, instance, -1)
+        else:
+            Retriever.set_repeat(Unit.projectile_info, instance, -1)
 
     @staticmethod
     def set_name_len(_, instance: Unit):
@@ -75,11 +76,11 @@ class Unit(BaseStruct):
 
     id: int                                  = Retriever(int16,                                                                default = -1, on_write = [sync_ids])
 
-    _name_str_id_de2: int                    = Retriever(uint32,         min_ver = Version((7, 1)),                            default = 0)
-    _creation_str_id_de2: int                = Retriever(uint32,         min_ver = Version((7, 1)),                            default = 0)
+    _name_str_id_de2: int                    = Retriever(uint32,         min_ver = Version((7, 2)),                            default = 0)
+    _creation_str_id_de2: int                = Retriever(uint32,         min_ver = Version((7, 2)),                            default = 0)
 
-    _name_str_id_aoe1_de1_aoe2_swgb: int     = Retriever(uint16,         min_ver = Version((3, 7)), max_ver = Version((5, 9)), default = 0)
-    _creation_str_id_aoe1_de1_aoe2_swgb: int = Retriever(uint16,         min_ver = Version((3, 7)), max_ver = Version((5, 9)), default = 0)
+    _name_str_id_aoe1_de1_aoe2_swgb: int     = Retriever(uint16,         min_ver = Version((3, 7)), max_ver = Version((7, 1)), default = 0)
+    _creation_str_id_aoe1_de1_aoe2_swgb: int = Retriever(uint16,         min_ver = Version((3, 7)), max_ver = Version((7, 1)), default = 0)
 
     name_str_id: int                         = RetrieverCombiner(_name_str_id_de2, _name_str_id_aoe1_de1_aoe2_swgb)
     creation_str_id: int                     = RetrieverCombiner(_creation_str_id_de2, _creation_str_id_aoe1_de1_aoe2_swgb)
@@ -91,7 +92,7 @@ class Unit(BaseStruct):
     dying_sprite_id: int                     = Retriever(int16,                                                                default = -1)
     undead_sprite_id: int                    = Retriever(int16,                                                                default = -1)
 
-    is_undead: bool                          = Retriever(bool8,                                                                default = False)
+    undead_mode: int                         = Retriever(int8,                                                                 default = False)
     hit_points: int                          = Retriever(int16,                                                                default = 1)
     line_of_sight: float                     = Retriever(float32,                                                              default = 2)
     garrison_capacity: int                   = Retriever(int8,                                                                 default = 0)
@@ -160,9 +161,9 @@ class Unit(BaseStruct):
     _obstruction_type_aoe2_swgb_de2: int     = Retriever(int8,           min_ver = Version((5, 7)),                            default = 0)
     _obstruction_class_aoe2_swgb_de2: int    = Retriever(int8,           min_ver = Version((5, 7)),                            default = 0)
     """aka selection_shape"""
-    trait: int                               = Retriever(uint8,          min_ver = Version((5, 7)),                            default = 0)
-    civilization_id: int                     = Retriever(int8,           min_ver = Version((5, 7)),                            default = 0)
-    trait_piece: int                         = Retriever(int16,          min_ver = Version((5, 7)),                            default = 0)
+    trait: int                               = Retriever(uint8,          min_ver = Version((5, 7)),                            default = 0) # todo: AoK
+    civilization_id: int                     = Retriever(int8,           min_ver = Version((5, 7)),                            default = 0) # todo: AoK
+    trait_piece: int                         = Retriever(int16,          min_ver = Version((5, 7)),                            default = 0) # todo: AoK
     """likely unused"""
 
     _obstruction_type_de1: int               = Retriever(int8,           min_ver = Version((4, 5)), max_ver = Version((4, 5)), default = 0)
@@ -178,8 +179,8 @@ class Unit(BaseStruct):
     selection_radius_z: float                = Retriever(float32,                                                              default = 0)
 
     # todo: investigate this
-    _scx_trigger_data1: int                  = Retriever(uint32,         min_ver = Version((7, 1)),                            default = 0)
-    _scx_trigger_data2: int                  = Retriever(uint32,         min_ver = Version((7, 1)),                            default = 0)
+    scx_trigger_data1: int                   = Retriever(uint32,         min_ver = Version((7, 1)),                            default = 0)
+    scx_trigger_data2: int                   = Retriever(uint32,         min_ver = Version((7, 1)),                            default = 0)
 
     resources: list[UnitResource]            = Retriever(FixedLenArray[UnitResource, 3],                                       default_factory = lambda sv: [UnitResource(sv) for _ in range(3)])
     damage_sprites: list[UnitDamageSprite]   = Retriever(Array8[UnitDamageSprite],                                             default_factory = lambda _: [])
@@ -219,7 +220,7 @@ class Unit(BaseStruct):
     movement_info: MovementInfo              = Retriever(MovementInfo,                                                         default_factory = MovementInfo)
     task_info: TaskInfo                      = Retriever(TaskInfo,                                                             default_factory = TaskInfo)
     combat_info: CombatInfo                  = Retriever(CombatInfo,                                                           default_factory = CombatInfo)
-    projectile_info: ProjectileData          = Retriever(ProjectileData,                                                       default_factory = ProjectileData)
+    projectile_info: ProjectileInfo          = Retriever(ProjectileInfo,                                                       default_factory = ProjectileInfo)
     creation_info: CreationInfo              = Retriever(CreationInfo,                                                         default_factory = CreationInfo)
     building_info: BuildingInfo              = Retriever(BuildingInfo,                                                         default_factory = BuildingInfo)
     # @formatter:on
