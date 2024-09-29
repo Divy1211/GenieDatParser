@@ -17,6 +17,7 @@ from src.sections.sprite_data import Sprite
 from src.sections.swgb_data import SwgbData
 from src.sections.tech import Tech
 from src.sections.tech_effect import TechEffect
+from src.sections.tech_tree import TechTree
 from src.sections.terrain_data import TerrainData
 from src.sections.terrain_table_data import TerrainTableData
 from src.sections.unit_data import UnitData
@@ -52,6 +53,7 @@ class DatFile(BaseStruct):
     unknown_swgb1: int                       = Retriever(Bytes[1],       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default = b"\x00")
     technologies: list[Tech]                 = Retriever(Array16[Tech],                                                          default_factory = lambda _: [])
     unknown_swgb2: int                       = Retriever(Bytes[1],       min_ver = Version((5, 9)), max_ver = Version((5, 9)),   default = b"\x00")
+    tech_tree: TechTree                      = Retriever(TechTree,                                                               default_factory = TechTree)
     # @formatter:on
 
     @classmethod
