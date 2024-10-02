@@ -1,0 +1,1 @@
+binary-file-parser==0.2.2
