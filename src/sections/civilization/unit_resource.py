@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from binary_file_parser import BaseStruct, Retriever
-from binary_file_parser.types import int16, float32, int8
+from bfp_rs import BaseStruct, Retriever
+from bfp_rs.types.le import i16, f32, i8
 
 
 class UnitResource(BaseStruct):
-    type: int       = Retriever(int16,      default = -1)
-    quantity: float = Retriever(float32,    default = 0)
-    store_mode: int = Retriever(int8,       default = 0)
+    # @formatter:off
+    type: int       = Retriever(i16, default = -1)
+    quantity: float = Retriever(f32, default = 0)
+    store_mode: int = Retriever(i8,  default = 0)
+    # @formatter:on

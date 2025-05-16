@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from binary_file_parser import BaseStruct, Retriever
-from binary_file_parser.types import int8, FixedLenStr, int32, uint8, int16, FixedLenArray, bool8, Bytes, uint16
+from bfp_rs import BaseStruct, Retriever
+from bfp_rs.types.le import i8, Str, i32, u8, i16, Array, bool8, Bytes, u16
 
 from src.sections.terrain_data.terrain_sprite_frame import TerrainSpriteFrame
 from src.sections.terrain_data.terrain_animation import TerrainAnimation
@@ -9,21 +9,21 @@ from src.sections.terrain_data.terrain_animation import TerrainAnimation
 
 class TerrainBorder(BaseStruct):
     # @formatter:off
-    enabled: int                        = Retriever(bool8,                                    default = False)
-    random: int                         = Retriever(int8,                                     default = 0)
-    internal_name: str                  = Retriever(FixedLenStr[13],                          default = "")
-    slp_filename: str                   = Retriever(FixedLenStr[13],                          default = "")
-    slp_id: int                         = Retriever(int32,                                    default = 0)
-    _slp_ptr: bytes                     = Retriever(Bytes[4],                                 default = b"\x00" * 4)
-    sound_id: int                       = Retriever(int32,                                    default = 0)
-    color: list[int]                    = Retriever(FixedLenArray[uint8, 3],                                    default = 0)
+    enabled: int                        = Retriever(bool8,                            default = False)
+    random: int                         = Retriever(i8,                               default = 0)
+    internal_name: str                  = Retriever(Str[13],                          default = "")
+    slp_filename: str                   = Retriever(Str[13],                          default = "")
+    slp_id: int                         = Retriever(i32,                              default = 0)
+    _slp_ptr: bytes                     = Retriever(Bytes[4],                         default = b"\x00" * 4)
+    sound_id: int                       = Retriever(i32,                              default = 0)
+    color: list[int]                    = Retriever(Array[3][u8],                     default_factory = lambda _ver: [0, 0, 0])
 
-    animation: TerrainAnimation         = Retriever(TerrainAnimation,                         default_factory = TerrainAnimation)
-    frames: list[TerrainSpriteFrame]    = Retriever(FixedLenArray[TerrainSpriteFrame, 19*12], default_factory = TerrainSpriteFrame)
+    animation: TerrainAnimation         = Retriever(TerrainAnimation,                 default_factory = TerrainAnimation)
+    frames: list[TerrainSpriteFrame]    = Retriever(Array[19*12][TerrainSpriteFrame], default_factory = lambda ver: [TerrainSpriteFrame(ver) for _ in range(19*12)])
 
-    draw_tile: int                      = Retriever(int8,                                     default = 0)
-    _padding: int                        = Retriever(int8,                                     default = 0)
+    draw_tile: int                      = Retriever(i8,                               default = 0)
+    _padding: int                       = Retriever(i8,                               default = 0)
 
-    underlay_terrain: int               = Retriever(uint16,                                   default = 0)
-    border_style: int                   = Retriever(int16,                                    default = 0)
+    underlay_terrain: int               = Retriever(u16,                              default = 0)
+    border_style: int                   = Retriever(i16,                              default = 0)
     # @formatter:on

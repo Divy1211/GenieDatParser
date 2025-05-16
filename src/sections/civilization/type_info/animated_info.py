@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from binary_file_parser import BaseStruct, Retriever
-from binary_file_parser.types import float32
+from bfp_rs import BaseStruct, Retriever
+from bfp_rs.types.le import f32
 
 
 class AnimationInfo(BaseStruct):
     # @formatter:off
-    speed: float = Retriever(float32, default = 0)
+    speed: float = Retriever(f32, default = 0)
     # @formatter:on

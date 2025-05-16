@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from binary_file_parser import BaseStruct, Retriever
-from binary_file_parser.types import int16, bool16
+from bfp_rs import BaseStruct, Retriever
+from bfp_rs.types.le import i16, bool16
 
 
 class UnitCost(BaseStruct):
-    resource_id: int    = Retriever(int16,      default = -1)
-    quantity: int       = Retriever(int16,      default = 0)
-    is_deducted: bool   = Retriever(bool16,     default = True)
+    resource_id: int    = Retriever(i16,    default = -1)
+    quantity: int       = Retriever(i16,    default = 0)
+    is_deducted: bool   = Retriever(bool16, default = True)

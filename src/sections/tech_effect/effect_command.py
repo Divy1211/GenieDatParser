@@ -1,14 +1,14 @@
 from __future__ import annotations
 
-from binary_file_parser import BaseStruct, Retriever
-from binary_file_parser.types import int8, int16, float32
+from bfp_rs import BaseStruct, Retriever
+from bfp_rs.types.le import i8, i16, f32
 
 
 class EffectCommand(BaseStruct):
     # @formatter:off
-    type: int = Retriever(int8,    default = 0)
-    a: int    = Retriever(int16,   default = 0)
-    b: int    = Retriever(int16,   default = 0)
-    c: int    = Retriever(int16,   default = 0)
-    d: int    = Retriever(float32, default = 0)
+    type: int = Retriever(i8,  default = 0)
+    a: int    = Retriever(i16, default = 0)
+    b: int    = Retriever(i16, default = 0)
+    c: int    = Retriever(i16, default = 0)
+    d: int    = Retriever(f32, default = 0)
     # @formatter:on

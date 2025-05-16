@@ -1,16 +1,16 @@
 from __future__ import annotations
 
-from binary_file_parser import BaseStruct, Retriever
-from binary_file_parser.types import int32
+from bfp_rs import BaseStruct, Retriever
+from bfp_rs.types.le import i32
 
 
 class MapTerrain(BaseStruct):
     # @formatter:off
-    percent: int            = Retriever(int32,  default = 0)
-    type: int               = Retriever(int32,  default = 0)
-    num_clumps: int         = Retriever(int32,  default = 0)
-    edge_spacing: int       = Retriever(int32,  default = 0)
-    placement_zone: int     = Retriever(int32,  default = 0)
+    percent: int            = Retriever(i32,  default = 0)
+    type: int               = Retriever(i32,  default = 0)
+    num_clumps: int         = Retriever(i32,  default = 0)
+    edge_spacing: int       = Retriever(i32,  default = 0)
+    placement_zone: int     = Retriever(i32,  default = 0)
     """aka base_terrain_type"""
-    clumpiness_factor: int  = Retriever(int32,  default = 0)
+    clumpiness_factor: int  = Retriever(i32,  default = 0)
     # @formatter:on

@@ -1,0 +1,10 @@
+[project]
+name = "genie-dat-parser"
+version = "0.1.0"
+description = "This library is a tool for parsing `.dat` files for games like `AoE2` that use the Genie Engine"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "binary-file-parser>=0.3.8a3",
+    "zlib-ng>=0.5.1",
+]

@@ -1,9 +1,13 @@
 from src.sections.datfile_sections import DatFile
+from src.utils import timed
 
 
 def main():
-    dat = DatFile.from_file(r"C:\Program Files (x86)\Steam\steamapps\common\AoE2DE\resources\_common\dat\empires2_x2_p1.dat", strict = False)
-    dat.to_file("./test.dat")
+    with timed("read"):
+        dat = DatFile.from_file(r"../empires2_x2_p1.dat")
+
+    with timed("write"):
+        DatFile.to_file(r"../dat.dat", dat)
 
 if __name__ == "__main__":
     main()

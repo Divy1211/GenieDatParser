@@ -1,3 +1,3 @@
-from binary_file_parser import Version
+from bfp_rs import Version
 
-DE_LATEST = Version((7, 8))
+DE_LATEST = Version(7, 8)
