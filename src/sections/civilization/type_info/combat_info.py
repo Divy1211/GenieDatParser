@@ -45,4 +45,9 @@ class CombatInfo(BaseStruct):
     displayed_range: float             = Retriever(f32,                                                         default = 0)
     displayed_reload_time: float       = Retriever(f32,                                                         default = 0)
     blast_damage: float                = Retriever(f32,              min_ver = Version(7, 7),                   default = 0)
+    damage_reflection: float           = Retriever(f32,              min_ver = Version(7, 9),                   default = 0)
+    friendly_fire_damage: float        = Retriever(f32,              min_ver = Version(7, 9),                   default = 0)
+    interrupt_frame: int               = Retriever(i16,              min_ver = Version(8, 4),                   default = 0)
+    garrison_firepower: float          = Retriever(f32,              min_ver = Version(8, 4),                   default = 0)
+    attack_graphic2: int               = Retriever(i16,              min_ver = Version(8, 4),                   default = 0)
     # @formatter:on
