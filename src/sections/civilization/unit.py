@@ -147,7 +147,7 @@ class Unit(BaseStruct):
     help_str_id: int                         = Retriever(i32,                                                            default = 0)
     hotkey_text_str_id: int                  = Retriever(i32,                                                            default = 0)
     """aka help_page_str_id"""
-    hotkey_str_id: int                       = Retriever(i32,                                                            default = 0)
+    hotkey_str_id: int                       = Retriever(i32,                                   max_ver = Version(8, 6), default = 0)
 
     recyclable: int                          = Retriever(i8,                                                             default = 0)
     enable_auto_gather: int                  = Retriever(i8,                                                             default = 0)
