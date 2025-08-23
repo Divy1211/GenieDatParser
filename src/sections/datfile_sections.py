@@ -3,7 +3,7 @@ from __future__ import annotations
 from zlib_ng import zlib_ng as zlib
 from typing import TYPE_CHECKING
 
-from bfp_rs import BaseStruct, Retriever, Version
+from bfp_rs import BaseStruct, Retriever, Version, Context
 from bfp_rs.types.le import (
     Bytes, Array16, Array32, StackedAttrArray16, Option32, i16
 )
@@ -85,5 +85,5 @@ class DatFile(BaseStruct):
         if num_terrains == 100:
             return Version(5, 7, 2) # HD DLCs
 
-    def __new__(cls, ver: Version = DE_LATEST, init_defaults: bool = True, **retriever_inits):
-        return super().__new__(cls, ver, init_defaults, **retriever_inits)
+    def __new__(cls, ver: Version = DE_LATEST, ctx = None, init_defaults: bool = True, **retriever_inits):
+        return super().__new__(cls, ver, ctx or Context(), init_defaults, **retriever_inits)
