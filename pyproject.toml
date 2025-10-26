@@ -5,6 +5,6 @@ description = "This library is a tool for parsing `.dat` files for games like `A
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "binary-file-parser>=0.3.0a11",
+    "binary-file-parser>=0.3.0a15",
     "zlib-ng>=0.5.1",
 ]
