@@ -38,6 +38,8 @@ def get_num_terrains(struct_ver: Version, num_used_terrains) -> int:
 
 
 class DatFile(BaseStruct):
+    __default_ver__ = DE_LATEST
+
     # @formatter:off
     file_version: bytes                      = Retriever(Bytes[8],                                                           default = b"VER 7.8\x00", remaining_compressed = True)
     swgb_data: SwgbData                      = Retriever(SwgbData,         min_ver = Version(5, 9), max_ver = Version(5, 9), default_factory = SwgbData)
@@ -84,6 +86,3 @@ class DatFile(BaseStruct):
             return Version(5, 7, 1) # AoC/HD
         if num_terrains == 100:
             return Version(5, 7, 2) # HD DLCs
-
-    def __new__(cls, ver: Version = DE_LATEST, ctx = None, init_defaults: bool = True, **retriever_inits):
-        return super().__new__(cls, ver, ctx or Context(), init_defaults, **retriever_inits)
