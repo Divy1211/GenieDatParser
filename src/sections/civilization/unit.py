@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner, ret
 from bfp_rs.combinators import set_repeat, set_, if_else, if_
 from bfp_rs.types.le import (
-    i8, u16, i16, u32, f32, i32, u8, Array8, Bytes, str16, bool8, Array, Str
+    i8, u16, i16, u32, f32, i32, u8, Array8, Bytes, str16, Array, Str
 )
 
 from src.sections.civilization.type_info import (
@@ -112,8 +112,8 @@ class Unit(BaseStruct):
     hide_in_editor: int                      = Retriever(i8,                                                             default = 0)
     old_portrait_icon_id: int                = Retriever(i16,                                                            default = -1)
 
-    enabled: bool                            = Retriever(bool8,                                                          default = True)
-    disabled: bool                           = Retriever(bool8,          min_ver = Version(5, 7),                        default = False)
+    enabled: int                            = Retriever(i8,                                                          default = 1)
+    disabled: int                           = Retriever(i8,          min_ver = Version(5, 7),                        default = 0)
 
     required_side_terrain_id1: int           = Retriever(i16,                                                            default = -1)
     required_side_terrain_id2: int           = Retriever(i16,                                                            default = -1)

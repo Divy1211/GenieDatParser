@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner
 from bfp_rs.types.le import (
-    i8, i32, i16, str16, u32, u8, bool8, NtStr, Bytes, Array, StackedAttrArray
+    i8, i32, i16, str16, u32, u8, NtStr, Bytes, Array, StackedAttrArray
 )
 
 from src.sections.terrain_data.terrain_sprite_frame import TerrainSpriteFrame
@@ -12,19 +12,19 @@ from src.sections.terrain_data.terrain_unit import TerrainUnit
 
 class Terrain(BaseStruct):
     # @formatter:off
-    enabled: bool                               = Retriever(bool8,                                                                   default = True)
+    enabled: int                               = Retriever(i8,                                                                   default = 1)
     random: int                                 = Retriever(i8,                                                                      default = 0)
 
-    _type_de1: int                              = Retriever(i8,        min_ver = Version(4, 5), max_ver = Version(4, 5),             default = False)
-    _hide_in_editor_de1: bool                   = Retriever(bool8,     min_ver = Version(4, 5), max_ver = Version(4, 5),             default = False)
+    _type_de1: int                              = Retriever(i8,        min_ver = Version(4, 5), max_ver = Version(4, 5),             default = 0)
+    _hide_in_editor_de1: int                   = Retriever(i8,     min_ver = Version(4, 5), max_ver = Version(4, 5),             default = 0)
     _str_id_de1: int                            = Retriever(i32,       min_ver = Version(4, 5), max_ver = Version(4, 5),             default = 0)
 
-    _type_de2: int                              = Retriever(i8,        min_ver = Version(7, 1),                                      default = False)
-    _hide_in_editor_de2: bool                   = Retriever(bool8,     min_ver = Version(7, 1),                                      default = False)
+    _type_de2: int                              = Retriever(i8,        min_ver = Version(7, 1),                                      default = 0)
+    _hide_in_editor_de2: int                   = Retriever(i8,     min_ver = Version(7, 1),                                      default = 0)
     _str_id_de2: int                            = Retriever(i32,       min_ver = Version(7, 1),                                      default = 0)
 
     type: int                                   = RetrieverCombiner(_type_de2, _type_de1)
-    hide_in_editor: bool                        = RetrieverCombiner(_hide_in_editor_de2, _hide_in_editor_de1)
+    hide_in_editor: int                        = RetrieverCombiner(_hide_in_editor_de2, _hide_in_editor_de1)
     str_id: int                                 = RetrieverCombiner(_str_id_de2, _str_id_de1)
 
     _blend_priority_de1: int                    = Retriever(i16,       min_ver = Version(4, 5), max_ver = Version(4, 5),             default = 0)

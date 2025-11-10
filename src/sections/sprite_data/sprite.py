@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner, ret
 from bfp_rs.combinators import set_repeat, if_, set_, if_len
 from bfp_rs.types.le import (
-    Bytes, str16, u16, bool8, i8, i16, Array, f32, u8, i32, NtStr
+    Bytes, str16, u16, i8, i16, Array, f32, u8, i32, NtStr, bool8
 )
 
 from src.sections.sprite_data.facet_attack_sound import FacetAttackSound
@@ -41,15 +41,15 @@ class Sprite(BaseStruct):
     _name_swgb: str                             = Retriever(NtStr[25],     min_ver = Version(5, 9), max_ver = Version(5, 9),    default = "")
     _file_name_swgb: str                        = Retriever(NtStr[25],     min_ver = Version(5, 9), max_ver = Version(5, 9),    default = "")
 
-    _str_sign1_de2: bytes                       = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x60\x0A")
+    _str_sign1_de2: bytes                       = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x0A\x60")
     _name_de2: str                              = Retriever(str16,         min_ver = Version(7, 1),                             default = "")
-    _str_sign2_de2: bytes                       = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x60\x0A")
+    _str_sign2_de2: bytes                       = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x0A\x60")
     _file_name_de2: str                         = Retriever(str16,         min_ver = Version(7, 1),                             default = "")
-    _str_sign3: bytes                           = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x60\x0A")
+    _str_sign3: bytes                           = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x0A\x60")
     particle_effect_name: str                   = Retriever(str16,         min_ver = Version(7, 1),                             default = "")
 
     slp_id: int                                 = Retriever(i32,                                                                default = -1)
-    is_loaded: bool                             = Retriever(bool8,                                                              default = False)
+    is_loaded: int                             = Retriever(i8,                                                              default = 0)
     force_player_color: int                     = Retriever(i8,                                                                 default = 0)
     layer: int                                  = Retriever(i8,                                                                 default = 0)
     color_table: int                            = Retriever(i16,                                                                default = -1)

@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from bfp_rs import BaseStruct, Retriever, Version
-from bfp_rs.types.le import i16, i8, f32, u32, bool8, bool16
+from bfp_rs.types.le import i16, i8, f32, u32
 
 
 class UnitTask(BaseStruct):
-    task_type: int                          = Retriever(i16,                             default = True)
+    task_type: int                          = Retriever(i16,                             default = 1)
     id: int                                 = Retriever(i16,                             default = -1)
-    is_default: bool                        = Retriever(bool8,                           default = False)
+    is_default: int                        = Retriever(i8,                           default = 0)
 
     action_type: int                        = Retriever(i16,                             default = 0)
 
@@ -27,7 +27,7 @@ class UnitTask(BaseStruct):
     """max_conversion_time"""
     work_range: float                       = Retriever(f32,                             default = 0)
 
-    auto_search_targets: bool               = Retriever(bool8,                           default = False)
+    auto_search_targets: int               = Retriever(i8,                           default = 0)
     search_wait_time: float                 = Retriever(f32,                             default = 0)
     enable_targeting: int                   = Retriever(i8,                              default = 0)
     combat_level: int                       = Retriever(i8,                              default = 0)
@@ -50,8 +50,8 @@ class UnitTask(BaseStruct):
     6 - Non Self
     other - All
     """
-    check_target_resource: bool             = Retriever(bool8,                           default = False)
-    is_build_task: bool                     = Retriever(bool8,                           default = False)
+    check_target_resource: int             = Retriever(i8,                           default = 0)
+    is_build_task: int                     = Retriever(i8,                           default = 0)
 
     move_sprite_id: int                     = Retriever(i16,                             default = -1)
     proceed_sprite_id: int                  = Retriever(i16,                             default = -1)
@@ -63,4 +63,4 @@ class UnitTask(BaseStruct):
 
     wwise_resource_gather_sound_id: int     = Retriever(u32,    min_ver = Version(7, 1), default = 0)
     wwise_resource_deposit_sound_id: int    = Retriever(u32,    min_ver = Version(7, 1), default = 0)
-    enabled: bool                           = Retriever(bool16, min_ver = Version(8, 5), default = True)
+    enabled: int                           = Retriever(i16, min_ver = Version(8, 5), default = 1)

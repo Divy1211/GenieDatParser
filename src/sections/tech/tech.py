@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner
-from bfp_rs.types.le import i16, bool8, Array, u16, u32, i8, i32, Bytes, str16, Array16, u8
+from bfp_rs.types.le import i16, Array, u16, u32, i8, i32, Bytes, str16, Array16, u8
 
 from src.sections.tech.tech_cost import TechCost
 
@@ -52,7 +52,7 @@ class Tech(BaseStruct):
     _str_sign_de2: bytes                            = Retriever(Bytes[2],                  min_ver = Version(7, 1),                          default = b"\x60\x0A")
     _name_de2: str                                  = Retriever(str16,                     min_ver = Version(7, 1),                          default = "")
 
-    repeatable: bool                                = Retriever(bool8,                     min_ver = Version(7, 1),                          default = False)
+    repeatable: int                                = Retriever(i8,                     min_ver = Version(7, 1),                          default = 0)
 
     _name_aoe1: str                                 = Retriever(str16,                     min_ver = Version(3, 7), max_ver = Version(3, 7), default = "")
     _name_aoe2_swgb: str                            = Retriever(str16,                     min_ver = Version(5, 7), max_ver = Version(5, 9), default = "")
