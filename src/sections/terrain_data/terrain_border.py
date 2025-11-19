@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from bfp_rs import BaseStruct, Retriever
-from bfp_rs.types.le import i8, Str, i32, u8, i16, Array, bool8, Bytes, u16
+from bfp_rs.types.le import i8, Str, i32, u8, i16, Array, Bytes, u16, bool8
 
 from src.sections.terrain_data.terrain_sprite_frame import TerrainSpriteFrame
 from src.sections.terrain_data.terrain_animation import TerrainAnimation
@@ -9,7 +9,7 @@ from src.sections.terrain_data.terrain_animation import TerrainAnimation
 
 class TerrainBorder(BaseStruct):
     # @formatter:off
-    enabled: int                        = Retriever(bool8,                            default = False)
+    enabled: bool                       = Retriever(bool8,                            default = False)
     random: int                         = Retriever(i8,                               default = 0)
     internal_name: str                  = Retriever(Str[13],                          default = "")
     slp_filename: str                   = Retriever(Str[13],                          default = "")

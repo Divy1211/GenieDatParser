@@ -17,8 +17,8 @@ class CombatInfo(BaseStruct):
 
     base_armor: int                    = RetrieverCombiner(_base_armor_de2, _base_armor_aoc, _base_armor_aok, _base_armor_de1, _base_armor_aoe1, _base_armor_swgb)
 
-    attacks: list[int]                 = Retriever(Array16[DamageClass], min_ver = Version(3, 7),               default_factory = lambda _ver: [])
-    armors: list[int]                  = Retriever(Array16[DamageClass], min_ver = Version(3, 7),               default_factory = lambda _ver: [])
+    attacks: list[DamageClass]                 = Retriever(Array16[DamageClass], min_ver = Version(3, 7),               default_factory = lambda _ver: [])
+    armors: list[DamageClass]                  = Retriever(Array16[DamageClass], min_ver = Version(3, 7),               default_factory = lambda _ver: [])
 
     defense_terrain_bonus: int         = Retriever(i16,                                                         default = -1)
     """aka boundary_id"""

@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner, ret
 from bfp_rs.combinators import set_repeat, if_, set_, if_len
 from bfp_rs.types.le import (
-    Bytes, str16, u16, bool8, i8, i16, Array, f32, u8, i32, NtStr
+    Bytes, str16, u16, i8, i16, Array, f32, u8, i32, NtStr, bool8
 )
 
 from src.sections.sprite_data.facet_attack_sound import FacetAttackSound
@@ -41,11 +41,11 @@ class Sprite(BaseStruct):
     _name_swgb: str                             = Retriever(NtStr[25],     min_ver = Version(5, 9), max_ver = Version(5, 9),    default = "")
     _file_name_swgb: str                        = Retriever(NtStr[25],     min_ver = Version(5, 9), max_ver = Version(5, 9),    default = "")
 
-    _str_sign1_de2: bytes                       = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x60\x0A")
+    _str_sign1_de2: bytes                       = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x0A\x60")
     _name_de2: str                              = Retriever(str16,         min_ver = Version(7, 1),                             default = "")
-    _str_sign2_de2: bytes                       = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x60\x0A")
+    _str_sign2_de2: bytes                       = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x0A\x60")
     _file_name_de2: str                         = Retriever(str16,         min_ver = Version(7, 1),                             default = "")
-    _str_sign3: bytes                           = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x60\x0A")
+    _str_sign3: bytes                           = Retriever(Bytes[2],      min_ver = Version(7, 1),                             default = b"\x0A\x60")
     particle_effect_name: str                   = Retriever(str16,         min_ver = Version(7, 1),                             default = "")
 
     slp_id: int                                 = Retriever(i32,                                                                default = -1)
@@ -57,7 +57,7 @@ class Sprite(BaseStruct):
     bounding_box: list[int]                     = Retriever(Array[4][u16],                                                      default_factory = lambda _ver: [0] * 4)
     num_deltas: int                             = Retriever(u16,                                                                default = 0, on_write = sync_repeats)
     sound_id: int                               = Retriever(i16,                                                                default = -1)
-    wwise_sound_id: int                         = Retriever(i32,           min_ver = Version(7, 1),                             default = 0)
+    wwise_sound_id: int                         = Retriever(i32,           min_ver = Version(7, 1),                      default = 0)
 
     facets_have_attack_sounds: bool             = Retriever(bool8,                                                              default = False)
     num_frames: int                             = Retriever(u16,                                                                default = 0)
@@ -69,7 +69,7 @@ class Sprite(BaseStruct):
     sequence_type: int                          = Retriever(u8,                                                                 default = 0)
     id: int                                     = Retriever(i16,                                                                default = -1)
     mirroring_mode: int                         = Retriever(u8,                                                                 default = 0)
-    editor_mode: int                            = Retriever(i8,            min_ver = Version(5, 7),                             default = 0)
+    editor_mode: int                            = Retriever(i8,            min_ver = Version(5, 7),                       default = 0)
 
     deltas: list[SpriteDelta]                   = Retriever(SpriteDelta,                                                        default_factory = SpriteDelta,      repeat = 0)
     facet_attack_sounds: list[FacetAttackSound] = Retriever(FacetAttackSound,                                                   default_factory = FacetAttackSound, repeat = 0)

@@ -34,6 +34,8 @@ class CreationInfo(BaseStruct):
     max_charge: float                           = Retriever(f32,                     min_ver = Version(7, 3), default = 0)
     charge_regen_rate: float                    = Retriever(f32,                     min_ver = Version(7, 3), default = 0)
 
+    charge_event: int                           = Retriever(i16,                     min_ver = Version(7, 3), default = 0)
+    charge_type: int                            = Retriever(i16,                     min_ver = Version(7, 3), default = 0)
     charge_target: float                        = Retriever(i16,                     min_ver = Version(8, 0), default = 0)
     charge_projectile_unit: float               = Retriever(i32,                     min_ver = Version(8, 2), default = 0)
     attack_priority: float                      = Retriever(u8,                      min_ver = Version(8, 2), default = 0)
@@ -44,8 +46,6 @@ class CreationInfo(BaseStruct):
     button_extend_tooltip_str_id: float         = Retriever(i32,                     min_ver = Version(8, 1), default = 0)
     button_hotkey_action: float                 = Retriever(i16,                     min_ver = Version(8, 1), default = 0)
 
-    charge_event: int                           = Retriever(i16,                     min_ver = Version(7, 3), default = 0)
-    charge_type: int                            = Retriever(i16,                     min_ver = Version(7, 3), default = 0)
 
     min_conversion_time_modifier: float         = Retriever(f32,                     min_ver = Version(7, 6), default = 0)
     max_conversion_time_modifier: float         = Retriever(f32,                     min_ver = Version(7, 6), default = 0)
