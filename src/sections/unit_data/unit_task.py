@@ -63,4 +63,4 @@ class UnitTask(BaseStruct):
 
     wwise_resource_gather_sound_id: int     = Retriever(u32,    min_ver = Version(7, 1), default = 0)
     wwise_resource_deposit_sound_id: int    = Retriever(u32,    min_ver = Version(7, 1), default = 0)
-    resource_which_enables_task: int        = Retriever(i16,    min_ver = Version(8, 5), default = 1)
+    resource_which_enables_task: int        = Retriever(i16,    min_ver = Version(8, 5), default = -1)
