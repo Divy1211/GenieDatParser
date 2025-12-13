@@ -4,10 +4,10 @@ from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner, ret
 from bfp_rs.combinators import set_repeat, set_, if_ver
 from bfp_rs.types.le import i32, u8, u16
 
-from src.sections.tech_tree.tech_tree_age import TechTreeAge
-from src.sections.tech_tree.tech_tree_building import TechTreeBuilding
-from src.sections.tech_tree.tech_tree_tech import TechTreeTech
-from src.sections.tech_tree.tech_tree_unit import TechTreeUnit
+from sections.tech_tree.tech_tree_age import TechTreeAge
+from sections.tech_tree.tech_tree_building import TechTreeBuilding
+from sections.tech_tree.tech_tree_tech import TechTreeTech
+from sections.tech_tree.tech_tree_unit import TechTreeUnit
 
 
 def set_repeats():

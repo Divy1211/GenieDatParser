@@ -3,9 +3,9 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner
 from bfp_rs.types.le import i8, i16, f32, i32, u16, u32, u8, Bytes, Array
 
-from src.sections.terrain_data.terrain import Terrain
-from src.sections.terrain_data.terrain_border import TerrainBorder
-from src.sections.terrain_data.tile_size import TileSize
+from sections.terrain_data.terrain import Terrain
+from sections.terrain_data.terrain_border import TerrainBorder
+from sections.terrain_data.tile_size import TileSize
 
 
 class TerrainData(BaseStruct):

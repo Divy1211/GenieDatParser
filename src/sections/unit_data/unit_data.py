@@ -3,8 +3,8 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version
 from bfp_rs.types.le import Array16, Array32, Option8
 
-from src.sections.unit_data.unit_line import UnitLine
-from src.sections.unit_data.unit_task import UnitTask
+from sections.unit_data.unit_line import UnitLine
+from sections.unit_data.unit_task import UnitTask
 
 
 class UnitData(BaseStruct):

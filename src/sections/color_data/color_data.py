@@ -3,8 +3,8 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version
 from bfp_rs.types.le import Array16
 
-from src.sections.color_data.player_color_data1 import PlayerColorData1
-from src.sections.color_data.player_color_data2 import PlayerColorData2
+from sections.color_data.player_color_data1 import PlayerColorData1
+from sections.color_data.player_color_data2 import PlayerColorData2
 
 
 class ColorData(BaseStruct):

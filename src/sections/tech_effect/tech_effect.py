@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner
 from bfp_rs.types.le import Bytes, str16, NtStr, Array16
 
-from src.sections.tech_effect.effect_command import EffectCommand
+from sections.tech_effect.effect_command import EffectCommand
 
 
 class TechEffect(BaseStruct):

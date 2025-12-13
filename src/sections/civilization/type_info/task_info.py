@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner
 from bfp_rs.types.le import f32, i16, i8, u32, Array16, Array
 
-from src.sections.unit_data import UnitTask
+from sections.unit_data import UnitTask
 
 
 class TaskInfo(BaseStruct):

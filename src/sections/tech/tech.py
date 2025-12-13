@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner
 from bfp_rs.types.le import i16, Array, u16, u32, i8, i32, Bytes, str16, Array16, u8, bool8
 
-from src.sections.tech.tech_cost import TechCost
+from sections.tech.tech_cost import TechCost
 
 
 class ResearchLocation(BaseStruct):

@@ -4,8 +4,8 @@ from bfp_rs import BaseStruct, Retriever, ret
 from bfp_rs.combinators import set_repeat
 from bfp_rs.types.le import u32, Bytes
 
-from src.sections.map_data.map_info2 import MapInfo2
-from src.sections.map_data.map_info1 import MapInfo1
+from sections.map_data.map_info2 import MapInfo2
+from sections.map_data.map_info1 import MapInfo1
 
 
 def map_repeats():

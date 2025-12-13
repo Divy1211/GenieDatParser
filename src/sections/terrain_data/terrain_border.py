@@ -3,8 +3,8 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever
 from bfp_rs.types.le import i8, Str, i32, u8, i16, Array, Bytes, u16, bool8
 
-from src.sections.terrain_data.terrain_sprite_frame import TerrainSpriteFrame
-from src.sections.terrain_data.terrain_animation import TerrainAnimation
+from sections.terrain_data.terrain_sprite_frame import TerrainSpriteFrame
+from sections.terrain_data.terrain_animation import TerrainAnimation
 
 
 class TerrainBorder(BaseStruct):

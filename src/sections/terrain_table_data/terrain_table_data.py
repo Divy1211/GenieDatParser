@@ -4,7 +4,7 @@ from bfp_rs import BaseStruct, Retriever, Version, ret
 from bfp_rs.combinators import set_repeat, set_, set_key
 from bfp_rs.types.le import u16, Bytes
 
-from src.sections.terrain_table_data.terrain_table import TerrainTable
+from sections.terrain_table_data.terrain_table import TerrainTable
 
 def terrain_table_repeats():
     return [

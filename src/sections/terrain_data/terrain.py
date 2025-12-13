@@ -5,9 +5,9 @@ from bfp_rs.types.le import (
     i8, i32, i16, str16, u32, u8, NtStr, Bytes, bool8, Array, StackedAttrArray
 )
 
-from src.sections.terrain_data.terrain_sprite_frame import TerrainSpriteFrame
-from src.sections.terrain_data.terrain_animation import TerrainAnimation
-from src.sections.terrain_data.terrain_unit import TerrainUnit
+from sections.terrain_data.terrain_sprite_frame import TerrainSpriteFrame
+from sections.terrain_data.terrain_animation import TerrainAnimation
+from sections.terrain_data.terrain_unit import TerrainUnit
 
 
 class Terrain(BaseStruct):

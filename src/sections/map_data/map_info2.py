@@ -4,10 +4,10 @@ from bfp_rs import BaseStruct, Retriever, ret
 from bfp_rs.combinators import set_repeat, set_
 from bfp_rs.types.le import i32, u32, Bytes
 
-from src.sections.map_data.map_elevation import MapElevation
-from src.sections.map_data.map_land import MapLand
-from src.sections.map_data.map_terrain import MapTerrain
-from src.sections.map_data.map_unit import MapUnit
+from sections.map_data.map_elevation import MapElevation
+from sections.map_data.map_land import MapLand
+from sections.map_data.map_terrain import MapTerrain
+from sections.map_data.map_unit import MapUnit
 
 
 def set_lands_repeat():

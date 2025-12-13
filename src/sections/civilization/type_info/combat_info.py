@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner
 from bfp_rs.types.le import i16, u8, i8, f32, Array16
 
-from src.sections.civilization.type_info.damage_class import DamageClass
+from sections.civilization.type_info.damage_class import DamageClass
 
 
 class CombatInfo(BaseStruct):

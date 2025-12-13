@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner
 from bfp_rs.types.le import i32, Array8, i8, Array, u8, StackedAttrArray
 
-from src.sections.tech_tree.tech_tree_dependency import TechTreeDependency
+from sections.tech_tree.tech_tree_dependency import TechTreeDependency
 
 
 class TechTreeUnit(BaseStruct):

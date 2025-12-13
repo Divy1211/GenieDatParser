@@ -4,7 +4,7 @@ from bfp_rs import BaseStruct, Retriever, ret
 from bfp_rs.combinators import set_repeat, set_key
 from bfp_rs.types.le import void, f32
 
-from src.sections.terrain_table_data.terrain_pass_graphic import TerrainPassGraphic
+from sections.terrain_table_data.terrain_pass_graphic import TerrainPassGraphic
 
 
 def set_dmg_mult_and_graphics_repeat():

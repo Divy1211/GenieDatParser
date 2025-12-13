@@ -6,8 +6,8 @@ from bfp_rs.types.le import (
     Bytes, str16, u16, i8, i16, Array, f32, u8, i32, NtStr, bool8
 )
 
-from src.sections.sprite_data.facet_attack_sound import FacetAttackSound
-from src.sections.sprite_data.sprite_delta import SpriteDelta
+from sections.sprite_data.facet_attack_sound import FacetAttackSound
+from sections.sprite_data.sprite_delta import SpriteDelta
 
 def set_repeats():
     return [

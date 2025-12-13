@@ -3,8 +3,8 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version
 from bfp_rs.types.le import i16, i8, f32, Array, i32, u8
 
-from src.sections.civilization.type_info.building_annex import BuildingAnnex
-from src.sections.civilization.type_info.looting_table import LootingTable
+from sections.civilization.type_info.building_annex import BuildingAnnex
+from sections.civilization.type_info.looting_table import LootingTable
 
 
 class BuildingInfo(BaseStruct):

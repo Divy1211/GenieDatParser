@@ -6,11 +6,11 @@ from bfp_rs.types.le import (
     i8, u16, i16, u32, f32, i32, u8, Array8, Bytes, str16, Array, Str, bool8
 )
 
-from src.sections.civilization.type_info import (
+from sections.civilization.type_info import (
     AnimationInfo, UnitType, MovementInfo, TaskInfo, CreationInfo, ProjectileInfo, CombatInfo, BuildingInfo
 )
-from src.sections.civilization.unit_damage_sprite import UnitDamageSprite
-from src.sections.civilization.unit_resource import UnitResource
+from sections.civilization.unit_damage_sprite import UnitDamageSprite
+from sections.civilization.unit_resource import UnitResource
 
 
 def disable_types():

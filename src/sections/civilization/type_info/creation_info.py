@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version
 from bfp_rs.types.le import Array, i16, f32, i8, i32, u8, Array16
 
-from src.sections.civilization.type_info.unit_cost import UnitCost
+from sections.civilization.type_info.unit_cost import UnitCost
 
 class TrainLocation(BaseStruct):
     # @formatter:off

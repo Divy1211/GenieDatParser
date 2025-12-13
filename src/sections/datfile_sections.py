@@ -8,19 +8,19 @@ from bfp_rs.types.le import (
     Bytes, Array16, Array32, StackedAttrArray16, Option32, i16
 )
 
-from src.sections.civilization import Civilization
-from src.sections.color_data import ColorData
-from src.sections.dat_versions import DE_LATEST
-from src.sections.map_data import MapData
-from src.sections.sounds import Sound
-from src.sections.sprite_data import Sprite
-from src.sections.swgb_data import SwgbData
-from src.sections.tech import Tech
-from src.sections.tech_effect import TechEffect
-from src.sections.tech_tree import TechTree
-from src.sections.terrain_data import TerrainData
-from src.sections.terrain_table_data import TerrainTableData
-from src.sections.unit_data import UnitData
+from sections.civilization import Civilization
+from sections.color_data import ColorData
+from sections.dat_versions import DE_LATEST
+from sections.map_data import MapData
+from sections.sounds import Sound
+from sections.sprite_data import Sprite
+from sections.swgb_data import SwgbData
+from sections.tech import Tech
+from sections.tech_effect import TechEffect
+from sections.tech_tree import TechTree
+from sections.terrain_data import TerrainData
+from sections.terrain_table_data import TerrainTableData
+from sections.unit_data import UnitData
 
 if TYPE_CHECKING:
     from bfp_rs import ByteStream

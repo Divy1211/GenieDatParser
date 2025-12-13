@@ -4,7 +4,7 @@ from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner, ret
 from bfp_rs.combinators import set_repeat, set_
 from bfp_rs.types.le import i16, u16, i32
 
-from src.sections.sounds.sound_file import SoundFile
+from sections.sounds.sound_file import SoundFile
 
 def sound_file_repeat():
     return [

@@ -7,7 +7,7 @@ from bfp_rs.types.le import (
     StackedAttrArray16, Option32
 )
 
-from src.sections.civilization.unit import Unit
+from sections.civilization.unit import Unit
 
 
 def resources_repeat():
