@@ -1,5 +1,6 @@
 import time
 import traceback
+
 from contextlib import contextmanager
 from typing import Callable, TypeVar, Generator
 
@@ -52,3 +53,10 @@ def log(v: T, tag: str = "") -> T:
         return v
     print(v)
     return v
+
+def batched(n: bytes, l: int):
+    for i in range(0, len(n), l):
+        yield n[i:i+l]
+
+def format_bytes(b: bytes) -> str:
+    return "\n".join(map(lambda x: bytes(x).hex(sep = " "), batched(b, 40)))

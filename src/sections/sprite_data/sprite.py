@@ -69,7 +69,7 @@ class Sprite(BaseStruct):
     sequence_type: int                          = Retriever(u8,                                                                 default = 0)
     id: int                                     = Retriever(i16,                                                                default = -1)
     mirroring_mode: int                         = Retriever(u8,                                                                 default = 0)
-    editor_mode: int                            = Retriever(i8,            min_ver = Version(5, 7),                       default = 0)
+    editor_mode: int                            = Retriever(i8,            min_ver = Version(5, 7),                             default = 0)
 
     deltas: list[SpriteDelta]                   = Retriever(SpriteDelta,                                                        default_factory = SpriteDelta,      repeat = 0)
     facet_attack_sounds: list[FacetAttackSound] = Retriever(FacetAttackSound,                                                   default_factory = FacetAttackSound, repeat = 0)
