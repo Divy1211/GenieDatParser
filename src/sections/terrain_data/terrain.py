@@ -30,14 +30,14 @@ class Terrain(BaseStruct):
     _blend_priority_de1: int                    = Retriever(i16,       min_ver = Version(4, 5), max_ver = Version(4, 5),              default = 0)
     _blend_mode_de1: int                        = Retriever(i16,       min_ver = Version(4, 5), max_ver = Version(4, 5),              default = 0)
 
-    _str_sign1_de1: int                         = Retriever(Bytes[2],  min_ver = Version(4, 5), max_ver = Version(4, 5),              default = b"\x60\x0A")
+    _str_sign1_de1: int                         = Retriever(Bytes[2],  min_ver = Version(4, 5), max_ver = Version(4, 5),              default = b"\x0A\x60")
     _internal_name_de1: str                     = Retriever(str16,     min_ver = Version(4, 5), max_ver = Version(4, 5),              default = "")
-    _str_sign2_de1: int                         = Retriever(Bytes[2],  min_ver = Version(4, 5), max_ver = Version(4, 5),              default = b"\x60\x0A")
+    _str_sign2_de1: int                         = Retriever(Bytes[2],  min_ver = Version(4, 5), max_ver = Version(4, 5),              default = b"\x0A\x60")
     _slp_filename_de1: str                      = Retriever(str16,     min_ver = Version(4, 5), max_ver = Version(4, 5),              default = "")
 
-    _str_sign1_de2: int                         = Retriever(Bytes[2],  min_ver = Version(7, 1),                                       default = b"\x60\x0A")
+    _str_sign1_de2: int                         = Retriever(Bytes[2],  min_ver = Version(7, 1),                                       default = b"\x0A\x60")
     _internal_name_de2: str                     = Retriever(str16,     min_ver = Version(7, 1),                                       default = "")
-    _str_sign2_de2: int                         = Retriever(Bytes[2],  min_ver = Version(7, 1),                                       default = b"\x60\x0A")
+    _str_sign2_de2: int                         = Retriever(Bytes[2],  min_ver = Version(7, 1),                                       default = b"\x0A\x60")
     _slp_filename_de2: str                      = Retriever(str16,     min_ver = Version(7, 1),                                       default = "")
 
     _internal_name_aoe1: str                    = Retriever(NtStr[13], min_ver = Version(3, 7), max_ver = Version(3, 7),              default = "")
@@ -65,7 +65,7 @@ class Terrain(BaseStruct):
     blend_priority: int                         = RetrieverCombiner(_blend_priority_aoe2, _blend_priority_de1)
     blend_mode: int                             = RetrieverCombiner(_blend_mode_aoe2, _blend_mode_de1)
 
-    _str_sign3_de2: bytes                       = Retriever(Bytes[2], min_ver = Version(7, 1),                                        default = b"\x60\x0A")
+    _str_sign3_de2: bytes                       = Retriever(Bytes[2], min_ver = Version(7, 1),                                        default = b"\x0A\x60")
     overlay_mask_name: str                      = Retriever(str16,    min_ver = Version(7, 1),                                        default = "")
 
     map_color_high: int                         = Retriever(u8,                                                                       default = 0)

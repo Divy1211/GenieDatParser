@@ -73,8 +73,8 @@ class Unit(BaseStruct):
 
     id: int                                  = Retriever(i16,                                                            default = -1, on_write = sync_ids)
 
-    _name_str_id_de2: int                    = Retriever(u32,         min_ver = Version(7, 2),                     default = 0)
-    _creation_str_id_de2: int                = Retriever(u32,         min_ver = Version(7, 2),                     default = 0)
+    _name_str_id_de2: int                    = Retriever(u32,         min_ver = Version(7, 2),                           default = 0)
+    _creation_str_id_de2: int                = Retriever(u32,         min_ver = Version(7, 2),                           default = 0)
 
     _name_str_id_aoe1_de1_aoe2_swgb: int     = Retriever(u16,         min_ver = Version(3, 7), max_ver = Version(7, 1),  default = 0)
     _creation_str_id_aoe1_de1_aoe2_swgb: int = Retriever(u16,         min_ver = Version(3, 7), max_ver = Version(7, 1),  default = 0)
@@ -98,11 +98,11 @@ class Unit(BaseStruct):
     radius_z: float                          = Retriever(f32,                                                            default = 0)
 
     train_sound_id: int                      = Retriever(i16,                                                            default = -1)
-    damage_sound_id1: int                    = Retriever(i16,          min_ver = Version(5, 7),                   default = -1)
+    damage_sound_id1: int                    = Retriever(i16,          min_ver = Version(5, 7),                          default = -1)
 
     dead_unit_id: int                        = Retriever(i16,                                                            default = -1)
     _blood_unit_id_de1: int                  = Retriever(i16,          min_ver = Version(4, 5), max_ver = Version(4, 5), default = -1)
-    _blood_unit_id_de2: int                  = Retriever(i16,          min_ver = Version(7, 1),                   default = -1)
+    _blood_unit_id_de2: int                  = Retriever(i16,          min_ver = Version(7, 1),                          default = -1)
 
     blood_unit_id: int                       = RetrieverCombiner(_blood_unit_id_de2, _blood_unit_id_de1)
 
@@ -113,7 +113,7 @@ class Unit(BaseStruct):
     old_portrait_icon_id: int                = Retriever(i16,                                                            default = -1)
 
     enabled: bool                            = Retriever(bool8,                                                          default = True)
-    disabled: bool                           = Retriever(bool8,           min_ver = Version(5, 7),                default = False)
+    disabled: bool                           = Retriever(bool8,           min_ver = Version(5, 7),                       default = False)
 
     required_side_terrain_id1: int           = Retriever(i16,                                                            default = -1)
     required_side_terrain_id2: int           = Retriever(i16,                                                            default = -1)
@@ -147,20 +147,20 @@ class Unit(BaseStruct):
     help_str_id: int                         = Retriever(i32,                                                            default = 0)
     hotkey_text_str_id: int                  = Retriever(i32,                                                            default = 0)
     """aka help_page_str_id"""
-    hotkey_str_id: int                       = Retriever(i32,                            max_ver = Version(8, 6), default = 0)
+    hotkey_str_id: int                       = Retriever(i32,                            max_ver = Version(8, 6),        default = 0)
 
     recyclable: int                          = Retriever(i8,                                                             default = 0)
     enable_auto_gather: int                  = Retriever(i8,                                                             default = 0)
     doppelganger_mode: int                   = Retriever(i8,                                                             default = 0)
     resource_gather_group: int               = Retriever(i8,                                                             default = 0)
 
-    occlusion_mode: int                      = Retriever(u8,           min_ver = Version(5, 7),                   default = 0)
-    _obstruction_type_aoe2_swgb_de2: int     = Retriever(i8,           min_ver = Version(5, 7),                   default = 0)
-    _obstruction_class_aoe2_swgb_de2: int    = Retriever(i8,           min_ver = Version(5, 7),                   default = 0)
+    occlusion_mode: int                      = Retriever(u8,           min_ver = Version(5, 7),                          default = 0)
+    _obstruction_type_aoe2_swgb_de2: int     = Retriever(i8,           min_ver = Version(5, 7),                          default = 0)
+    _obstruction_class_aoe2_swgb_de2: int    = Retriever(i8,           min_ver = Version(5, 7),                          default = 0)
     """aka selection_shape"""
-    trait: int                               = Retriever(u8,           min_ver = Version(5, 7, 1),                default = 0)
-    civilization_id: int                     = Retriever(i8,           min_ver = Version(5, 7, 1),                default = 0)
-    trait_piece: int                         = Retriever(i16,          min_ver = Version(5, 7, 1),                default = 0)
+    trait: int                               = Retriever(u8,           min_ver = Version(5, 7, 1),                       default = 0)
+    civilization_id: int                     = Retriever(i8,           min_ver = Version(5, 7, 1),                       default = 0)
+    trait_piece: int                         = Retriever(i16,          min_ver = Version(5, 7, 1),                       default = 0)
     """likely unused"""
 
     _obstruction_type_de1: int               = Retriever(i8,           min_ver = Version(4, 5), max_ver = Version(4, 5), default = 0)
@@ -176,8 +176,8 @@ class Unit(BaseStruct):
     selection_radius_z: float                = Retriever(f32,                                                            default = 0)
 
     # todo: investigate this
-    scx_trigger_data1: int                   = Retriever(u32,         min_ver = Version(7, 1),                    default = 0)
-    scx_trigger_data2: int                   = Retriever(u32,         min_ver = Version(7, 1),                    default = 0)
+    scx_trigger_data1: int                   = Retriever(u32,         min_ver = Version(7, 1),                           default = 0)
+    scx_trigger_data2: int                   = Retriever(u32,         min_ver = Version(7, 1),                           default = 0)
 
     resources: list[UnitResource]            = Retriever(Array[3][UnitResource],                                         default_factory = lambda ver: [UnitResource(ver) for _ in range(3)])
     damage_sprites: list[UnitDamageSprite]   = Retriever(Array8[UnitDamageSprite],                                       default_factory = lambda _ver: [])
@@ -193,8 +193,8 @@ class Unit(BaseStruct):
     old_attack_mode: int                     = Retriever(i8,                                                             default = 0)
     convert_terrain: int                     = Retriever(i8,                                                             default = 0)
 
-    _str_sign_de1: bytes                     = Retriever(Bytes[2],    min_ver = Version(4, 5), max_ver = Version(4, 5),  default = b"\x60\x0A")
-    _str_sign_de2: bytes                     = Retriever(Bytes[2],    min_ver = Version(7, 1),                           default = b"\x60\x0A")
+    _str_sign_de1: bytes                     = Retriever(Bytes[2],    min_ver = Version(4, 5), max_ver = Version(4, 5),  default = b"\x0A\x60")
+    _str_sign_de2: bytes                     = Retriever(Bytes[2],    min_ver = Version(7, 1),                           default = b"\x0A\x60")
 
     _name_de1: str                           = Retriever(str16,       min_ver = Version(4, 5), max_ver = Version(4, 5),  default = "")
     _name_de2: str                           = Retriever(str16,       min_ver = Version(7, 1),                           default = "")

@@ -6,7 +6,7 @@ from bfp_rs.types.le import str16, Str, i32, i16, Bytes
 
 class SoundFile(BaseStruct):
     # @formatter:off
-    _str_sign1: bytes    = Retriever(Bytes[2], min_ver = Version(4, 5), max_ver = Version(4, 5),           default = b"\x60\x0A")
+    _str_sign1: bytes    = Retriever(Bytes[2], min_ver = Version(4, 5), max_ver = Version(4, 5),           default = b"\x0A\x60")
     _sound_name_de1: str = Retriever(str16,    min_ver = Version(4, 5), max_ver = Version(4, 5),           default = "")
     _str_sign2: bytes    = Retriever(Bytes[2], min_ver = Version(7, 1),                                    default = b"\x0A\x60")
     _sound_name_de2: str = Retriever(str16,    min_ver = Version(7, 1),                                    default = "")

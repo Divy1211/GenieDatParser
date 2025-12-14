@@ -29,9 +29,9 @@ class Sprite(BaseStruct):
     _name_aoe1: str                             = Retriever(NtStr[21],     min_ver = Version(3, 7), max_ver = Version(3, 7),    default = "")
     _file_name_aoe1: str                        = Retriever(NtStr[13],     min_ver = Version(3, 7), max_ver = Version(3, 7),    default = "")
 
-    _str_sign1_de1: bytes                       = Retriever(Bytes[2],      min_ver = Version(4, 5), max_ver = Version(4, 5),    default = b"\x60\x0A")
+    _str_sign1_de1: bytes                       = Retriever(Bytes[2],      min_ver = Version(4, 5), max_ver = Version(4, 5),    default = b"\x0A\x60")
     _name_de1: str                              = Retriever(str16,         min_ver = Version(4, 5), max_ver = Version(4, 5),    default = "")
-    _str_sign2_de1: bytes                       = Retriever(Bytes[2],      min_ver = Version(4, 5), max_ver = Version(4, 5),    default = b"\x60\x0A")
+    _str_sign2_de1: bytes                       = Retriever(Bytes[2],      min_ver = Version(4, 5), max_ver = Version(4, 5),    default = b"\x0A\x60")
     _file_name_de1: str                         = Retriever(str16,         min_ver = Version(4, 5), max_ver = Version(4, 5),    default = "")
     first_frame: int                            = Retriever(u16,           min_ver = Version(4, 5), max_ver = Version(4, 5),    default = 0)
 

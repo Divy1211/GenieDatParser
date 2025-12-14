@@ -5,7 +5,7 @@ This library is a tool for parsing `.dat` files for games like `AoE2` that use t
 ## Usage
 
 ```py
-from src.sections.datfile_sections import DatFile
+from sections.datfile_sections import DatFile
 
 dat = DatFile.from_file(r"/path/to/empires2_x2_p1.dat")
 
