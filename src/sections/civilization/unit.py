@@ -25,14 +25,14 @@ def disable_types():
     ]
 
     return [if_else(
-        if_(Unit.base_class).lt(UnitType.Animated).then(*disables),
-        if_(Unit.base_class).eq(UnitType.LegacyTree).then(*disables),
-        if_(Unit.base_class).lt(UnitType.Moving).then(*disables[1:]),
-        if_(Unit.base_class).lt(UnitType.Acting).then(*disables[2:]),
-        if_(Unit.base_class).lt(UnitType.Combat).then(*disables[3:]),
-        if_(Unit.base_class).eq(UnitType.Projectile).then(*disables[5:]),
-        if_(Unit.base_class).lt(UnitType.Creatable).then(*disables[4:]),
-        if_(Unit.base_class).lt(UnitType.Building).then(*disables[6:], disables[4]),
+        if_(Unit.type_).lt(UnitType.Animated).then(*disables),
+        if_(Unit.type_).eq(UnitType.LegacyTree).then(*disables),
+        if_(Unit.type_).lt(UnitType.Moving).then(*disables[1:]),
+        if_(Unit.type_).lt(UnitType.Acting).then(*disables[2:]),
+        if_(Unit.type_).lt(UnitType.Combat).then(*disables[3:]),
+        if_(Unit.type_).eq(UnitType.Projectile).then(*disables[5:]),
+        if_(Unit.type_).lt(UnitType.Creatable).then(*disables[4:]),
+        if_(Unit.type_).lt(UnitType.Building).then(*disables[6:], disables[4]),
         set_repeat(ret(Unit.projectile_info)).to(-1),
     )]
 
@@ -66,7 +66,7 @@ def sync_ids():
 
 class Unit(BaseStruct):
     # @formatter:off
-    base_class: int                          = Retriever(i8,                                                             default = UnitType.EyeCandy, on_read = disable_types)
+    type_: int                               = Retriever(i8,                                                             default = UnitType.EyeCandy, on_read = disable_types)
 
     _len_name_aoe1: int                      = Retriever(u16,         min_ver = Version(3, 7), max_ver = Version(3, 7),  default = 0, on_read = name_aoe1_len, on_write = sync_name_aoe1_len)
     _len_name_aoe2_swgb: int                 = Retriever(u16,         min_ver = Version(5, 7), max_ver = Version(5, 9),  default = 0, on_read = name_aoe2_len, on_write = sync_name_aoe2_len)
@@ -213,11 +213,11 @@ class Unit(BaseStruct):
 
     telemetry_id: int                        = Retriever(i16,          min_ver = Version(4, 5), max_ver = Version(4, 5), default = -1)
 
-    animation_info: AnimationInfo            = Retriever(AnimationInfo,                                                  default_factory = AnimationInfo)
-    movement_info: MovementInfo              = Retriever(MovementInfo,                                                   default_factory = MovementInfo)
-    task_info: TaskInfo                      = Retriever(TaskInfo,                                                       default_factory = TaskInfo)
-    combat_info: CombatInfo                  = Retriever(CombatInfo,                                                     default_factory = CombatInfo)
-    projectile_info: ProjectileInfo          = Retriever(ProjectileInfo,                                                 default_factory = ProjectileInfo)
-    creation_info: CreationInfo              = Retriever(CreationInfo,                                                   default_factory = CreationInfo)
-    building_info: BuildingInfo              = Retriever(BuildingInfo,                                                   default_factory = BuildingInfo)
+    animation_info: AnimationInfo | None     = Retriever(AnimationInfo,                                                  default_factory = AnimationInfo)
+    movement_info: MovementInfo | None       = Retriever(MovementInfo,                                                   default_factory = MovementInfo)
+    task_info: TaskInfo | None               = Retriever(TaskInfo,                                                       default_factory = TaskInfo)
+    combat_info: CombatInfo | None           = Retriever(CombatInfo,                                                     default_factory = CombatInfo)
+    projectile_info: ProjectileInfo | None   = Retriever(ProjectileInfo,                                                 default_factory = ProjectileInfo)
+    creation_info: CreationInfo | None       = Retriever(CreationInfo,                                                   default_factory = CreationInfo)
+    building_info: BuildingInfo | None       = Retriever(BuildingInfo,                                                   default_factory = BuildingInfo)
     # @formatter:on
