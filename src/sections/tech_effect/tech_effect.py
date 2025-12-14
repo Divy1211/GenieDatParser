@@ -8,10 +8,10 @@ from sections.tech_effect.effect_command import EffectCommand
 
 class TechEffect(BaseStruct):
     # @formatter:off
-    _str_sign_de1: bytes         = Retriever(Bytes[2],  min_ver = Version(4, 5), max_ver = Version(4, 5), default = b"\x60\x0A")
+    _str_sign_de1: bytes         = Retriever(Bytes[2],  min_ver = Version(4, 5), max_ver = Version(4, 5), default = b"\x0A\x60")
     _name_de1: str               = Retriever(str16,     min_ver = Version(4, 5), max_ver = Version(4, 5), default = "")
 
-    _str_sign_de2: bytes         = Retriever(Bytes[2],  min_ver = Version(7, 1),                          default = b"\x60\x0A")
+    _str_sign_de2: bytes         = Retriever(Bytes[2],  min_ver = Version(7, 1),                          default = b"\x0A\x60")
     _name_de2: str               = Retriever(str16,     min_ver = Version(7, 1),                          default = "")
 
     _name_aoe1: str              = Retriever(NtStr[31], min_ver = Version(3, 7), max_ver = Version(3, 7), default = "")
