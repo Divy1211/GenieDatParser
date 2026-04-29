@@ -9,7 +9,10 @@ from src.utils import timed, format_bytes
 
 def main():
     with timed("read"):
-        dat1 = DatFile.from_file(r"../empires2_x2_p1.dat")
+        dat = DatFile.from_file(r"../empires2_x2_p1.dat")
+
+    with timed("write"):
+        dat.to_file("../empires2_x2_p1_2.dat")
 
     # dat = DatFile.from_json(r"../dtest.json")
     # dat = DatFile()

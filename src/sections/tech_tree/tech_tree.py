@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner, ret
 from bfp_rs.combinators import set_repeat, set_, if_ver
-from bfp_rs.types.le import i32, u8, u16
+from bfp_rs.types.le import i32, u8, u16, i16
 
 from sections.tech_tree.tech_tree_age import TechTreeAge
 from sections.tech_tree.tech_tree_building import TechTreeBuilding
@@ -62,9 +62,10 @@ class TechTree(BaseStruct):
 
     _num_units_age1_aoe2_swgb: int      = Retriever(u8,  min_ver = Version(3, 7), max_ver = Version(5, 7, 2), default = 0)
     _num_units_swgb: int                = Retriever(u16, min_ver = Version(5, 9), max_ver = Version(5, 9),    default = 0)
-    _num_units_de2: int                 = Retriever(u8,  min_ver = Version(7, 1),                             default = 0)
+    _num_units_de2_1: int               = Retriever(u8,  min_ver = Version(7, 1), max_ver = Version(8, 8),    default = 0)
+    _num_units_de2_2: int               = Retriever(i16, min_ver = Version(8, 9),                             default = 0)
 
-    num_units: int                      = RetrieverCombiner(_num_units_de2, _num_units_age1_aoe2_swgb, _num_units_swgb)
+    num_units: int                      = RetrieverCombiner(_num_units_de2_2, _num_units_de2_1, _num_units_age1_aoe2_swgb, _num_units_swgb)
     num_techs: int                      = Retriever(u8,                                                       default = 0, on_read = set_repeats)
     num_groups: int                     = Retriever(i32,                                                      default = 0)
 
