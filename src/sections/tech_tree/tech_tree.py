@@ -21,8 +21,11 @@ def set_repeats():
         if_ver(min = Version(5, 9), max = Version(5, 9)).then(
             set_repeat(ret(TechTree.units)).from_(TechTree._num_units_swgb),
         ),
-        if_ver(min = Version(7, 1)).then(
-            set_repeat(ret(TechTree.units)).from_(TechTree._num_units_de2),
+        if_ver(min = Version(7, 1), max = Version(8, 8)).then(
+            set_repeat(ret(TechTree.units)).from_(TechTree._num_units_de2_1),
+        ),
+        if_ver(min = Version(8, 9)).then(
+            set_repeat(ret(TechTree.units)).from_(TechTree._num_units_de2_2),
         ),
 
         set_repeat(ret(TechTree.techs)).from_(TechTree.num_techs),
