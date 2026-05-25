@@ -40,8 +40,11 @@ def sync_repeats():
         if_ver(min = Version(5, 9), max = Version(5, 9)).then(
             set_(TechTree._num_units_swgb).from_len(ret(TechTree.units))
         ),
-        if_ver(min = Version(7, 1)).then(
-            set_(TechTree._num_units_de2).from_len(ret(TechTree.units))
+        if_ver(min = Version(7, 1), max = Version(8, 8)).then(
+            set_(TechTree._num_units_de2_1).from_len(ret(TechTree.units))
+        ),
+        if_ver(min = Version(8, 9)).then(
+            set_(TechTree._num_units_de2_2).from_len(ret(TechTree.units))
         ),
 
         set_(TechTree.num_techs).from_len(ret(TechTree.techs)),

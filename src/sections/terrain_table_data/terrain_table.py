@@ -16,6 +16,6 @@ def set_dmg_mult_and_graphics_repeat():
 class TerrainTable(BaseStruct):
     # @formatter:off
     _void                                                 = Retriever(void,                             on_read = set_dmg_mult_and_graphics_repeat, repeat = -2)
-    passable_buildable_dmg_mult: list[int]                = Retriever(f32,                              default = 0, repeat = 0)
-    terrain_pass_graphics: list[TerrainPassGraphic]       = Retriever(TerrainPassGraphic,               default = 0, repeat = 0)
+    passable_buildable_dmg_mult: list[int]                = Retriever(f32,                              default = 0,                                repeat = 0)
+    terrain_pass_graphics: list[TerrainPassGraphic]       = Retriever(TerrainPassGraphic,               default_factory = TerrainPassGraphic,       repeat = 0)
     # @formatter:on
