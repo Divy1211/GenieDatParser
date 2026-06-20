@@ -50,7 +50,7 @@ class UnitTask(BaseStruct):
     6 - Non Self
     other - All
     """
-    target_resource_flag: bool              = Retriever(bool8,                                  default = False)
+    target_resource_flag: int               = Retriever(i8,                                     default = 0)
     build_task_flag: bool                   = Retriever(bool8,                                  default = False)
 
     move_sprite_id: int                     = Retriever(i16,                                    default = -1)

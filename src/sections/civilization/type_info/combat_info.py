@@ -30,7 +30,7 @@ class CombatInfo(BaseStruct):
     reload_time: float                 = Retriever(f32,                                                                          default = 0)
     projectile_unit_id: int            = Retriever(i16,                                                                          default = -1)
     accuracy_percent: int              = Retriever(i16,                                                                          default = 0)
-    break_off_combat: int              = Retriever(i8,                                                                           default = 0)
+    break_off_combat: int              = Retriever(u8,                                                                           default = 0)
     """unused"""
     frame_delay: int                   = Retriever(i16,                                                                          default = 0)
     weapon_offset_x: float             = Retriever(f32,                                                                          default = 0)
