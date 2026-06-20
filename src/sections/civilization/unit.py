@@ -112,8 +112,8 @@ class Unit(BaseStruct):
     hide_in_editor: int                      = Retriever(i8,                                                             default = 0)
     old_portrait_icon_id: int                = Retriever(i16,                                                            default = -1)
 
-    enabled: bool                            = Retriever(bool8,                                                          default = True)
-    disabled: bool                           = Retriever(bool8,           min_ver = Version(5, 7),                       default = False)
+    enabled: int                             = Retriever(i8,                                                             default = 1)
+    disabled: int                            = Retriever(i8,           min_ver = Version(5, 7),                          default = 0)
 
     required_side_terrain_id1: int           = Retriever(i16,                                                            default = -1)
     required_side_terrain_id2: int           = Retriever(i16,                                                            default = -1)
