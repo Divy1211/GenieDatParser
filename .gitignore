@@ -1,2 +1,4 @@
 .venv/*
 *.dat
+__pycache__
+genie_dat_parser.egg-info

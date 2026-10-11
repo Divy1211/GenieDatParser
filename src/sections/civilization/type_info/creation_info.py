@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from bfp_rs import BaseStruct, Retriever, Version
+from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner, ret
 from bfp_rs.types.le import Array, i16, f32, i8, i32, u8, Array16
 
 from sections.civilization.type_info.unit_cost import UnitCost
@@ -17,8 +17,10 @@ class CreationInfo(BaseStruct):
     # @formatter:off
     costs: list[UnitCost]                       = Retriever(Array[3][UnitCost],                                                         default_factory = lambda ver: [UnitCost(ver) for _ in range(3)])
 
-    train_locations_old: list[TrainLocation]    = Retriever(Array[1][TrainLocation],                          max_ver = Version(8, 5),  default_factory = lambda ver: [TrainLocation(ver)])
-    train_locations_new: list[TrainLocation]    = Retriever(Array16[TrainLocation],  min_ver = Version(8, 6),                           default_factory = lambda ver: [])
+    _train_locations_old: list[TrainLocation]   = Retriever(Array[1][TrainLocation],                          max_ver = Version(8, 5),  default_factory = lambda ver: [TrainLocation(ver)])
+    _train_locations_new: list[TrainLocation]   = Retriever(Array16[TrainLocation],  min_ver = Version(8, 6),                           default_factory = lambda ver: [])
+
+    train_locations: list[TrainLocation]        = RetrieverCombiner(ret(_train_locations_new), ret(_train_locations_old))
 
     rear_attack_modifier: float                 = Retriever(f32,                     min_ver = Version(5, 7), default = 0)
     """aka heal_timer"""

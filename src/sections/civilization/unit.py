@@ -3,7 +3,7 @@ from __future__ import annotations
 from bfp_rs import BaseStruct, Retriever, Version, RetrieverCombiner, ret
 from bfp_rs.combinators import set_repeat, set_, if_else, if_
 from bfp_rs.types.le import (
-    i8, u16, i16, u32, f32, i32, u8, Array8, Bytes, str16, Array, Str, bool8
+    i8, u16, i16, u32, f32, i32, u8, Array8, Bytes, str16, Array, Str
 )
 
 from sections.civilization.type_info import (
@@ -25,14 +25,14 @@ def disable_types():
     ]
 
     return [if_else(
-        if_(Unit.type_).lt(UnitType.Animated).then(*disables),
-        if_(Unit.type_).eq(UnitType.LegacyTree).then(*disables),
-        if_(Unit.type_).lt(UnitType.Moving).then(*disables[1:]),
-        if_(Unit.type_).lt(UnitType.Acting).then(*disables[2:]),
-        if_(Unit.type_).lt(UnitType.Combat).then(*disables[3:]),
-        if_(Unit.type_).eq(UnitType.Projectile).then(*disables[5:]),
-        if_(Unit.type_).lt(UnitType.Creatable).then(*disables[4:]),
-        if_(Unit.type_).lt(UnitType.Building).then(*disables[6:], disables[4]),
+        if_(ret(Unit.type_)).lt(UnitType.Animated).then(*disables),
+        if_(ret(Unit.type_)).eq(UnitType.LegacyTree).then(*disables),
+        if_(ret(Unit.type_)).lt(UnitType.Moving).then(*disables[1:]),
+        if_(ret(Unit.type_)).lt(UnitType.Acting).then(*disables[2:]),
+        if_(ret(Unit.type_)).lt(UnitType.Combat).then(*disables[3:]),
+        if_(ret(Unit.type_)).eq(UnitType.Projectile).then(*disables[5:]),
+        if_(ret(Unit.type_)).lt(UnitType.Creatable).then(*disables[4:]),
+        if_(ret(Unit.type_)).lt(UnitType.Building).then(*disables[6:], disables[4]),
         set_repeat(ret(Unit.projectile_info)).to(-1),
     )]
 

@@ -9,4 +9,5 @@ from .movement_info import MovementInfo
 from .projectile_info import ProjectileInfo
 from .task_info import TaskInfo
 from .unit_cost import UnitCost
-from .unit_type import UnitType
+
+from .datasets import UnitType, UnitClass
